@@ -1,9 +1,11 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { MyContext } from './MyContext';
-import Home from './pages/Home';
-import Header from './components/Header';
+import { MyContext } from "./MyContext";
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import About from "./pages/About";
+import Methodology from "./pages/Methodology";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/methodology" element={<Methodology />} />
           </Routes>
         </Router>
       </MyContext.Provider>

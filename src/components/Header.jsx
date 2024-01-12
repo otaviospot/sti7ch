@@ -13,21 +13,20 @@ export default function Header() {
       <div className="flex items-center flex-1 justify-end gap-5">
         <nav className="flex flex-0-auto">
           <ul className="flex flex-row items-center justify-end gap-5">
-            <li className="text-blue-one hover:text-black">
-              <Link to="/">About</Link>
+            <li className="text-black hover:text-blue-one text-[20px] uppercase">
+              <Link to="/about">About</Link>
             </li>
-            <li className="text-blue-one hover:text-black">
-              <Link to="/">Methodology</Link>
+            <li className="text-black hover:text-blue-one text-[20px] uppercase">
+              <Link to="/methodology">Methodology</Link>
             </li>
-            <li className="text-blue-one hover:text-black">
+            <li className="text-black hover:text-blue-one text-[20px] uppercase">
               <Link to="/">Case Studies</Link>
             </li>
-            <li className="text-blue-one hover:text-black">
+            <li className="text-black hover:text-blue-one text-[20px] uppercase">
               <Link to="/">Contact</Link>
             </li>
           </ul>
         </nav>
-
       </div>
     </header>
   );

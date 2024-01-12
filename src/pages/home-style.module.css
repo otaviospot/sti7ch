@@ -1,15 +1,31 @@
 .content {
   position: relative;
-  width: 78%;
+  width: 80%;
 }
 
 .content p {
   font-size: 4vw;
   line-height: 4.5vw;
   text-align: left;
-  font-family: 'modelica-light', sans-serif;
+  font-family: "modelica-light", sans-serif;
 }
 
 .content strong {
-  font-family: 'modelica-bold', sans-serif;
+  font-family: "modelica-bold", sans-serif;
+}
+
+.btn1 {
+  position: absolute;
+  bottom: -30%;
+}
+
+.btn1:before {
+  content: "";
+  width: 699px;
+  height: 189px;
+  background-image: url(../assets/images/line-btn1.webp);
+  position: absolute;
+  display: block;
+  left: -105%;
+  top: -55%;
 }

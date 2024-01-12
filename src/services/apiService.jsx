@@ -6,6 +6,6 @@ export async function apiGetPage(id) {
 }
 
 export async function apiGetPostType(slug) {
-  const postTypeContent = await read(slug);
+  const postTypeContent = await read(`/${slug}`);
   return postTypeContent;
 }
