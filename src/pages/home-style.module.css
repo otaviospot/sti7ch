@@ -1,0 +1,15 @@
+.content {
+  position: relative;
+  width: 78%;
+}
+
+.content p {
+  font-size: 4vw;
+  line-height: 4.5vw;
+  text-align: left;
+  font-family: 'modelica-light', sans-serif;
+}
+
+.content strong {
+  font-family: 'modelica-bold', sans-serif;
+}

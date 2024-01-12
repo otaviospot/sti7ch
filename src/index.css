@@ -1,3 +1,44 @@
+/* Inserimos primeiro o que é necessário ao Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'modelica-bold';
+  src: url('./assets/fonts/bold/BwModelicaBold.eot');
+  src: url('./assets/fonts/bold/BwModelicaBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/bold/BwModelicaBold.woff') format('woff'),
+    url('./assets/fonts/bold/BwModelicaBold.ttf') format('truetype'),
+    url('./assets/fonts/bold/BwModelicaBold.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'modelica-light';
+  src: url('./assets/fonts/light/BwModelicaLight.eot');
+  src: url('./assets/fonts/light/BwModelicaLight.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/light/BwModelicaLight.woff') format('woff'),
+    url('./assets/fonts/light/BwModelicaLight.ttf') format('truetype'),
+    url('./assets/fonts/light/BwModelicaLight.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'modelica-med';
+  src: url('./assets/fonts/medium/BwModelicaMedium.eot');
+  src: url('./assets/fonts/medium/BwModelicaMedium.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/medium/BwModelicaMedium.woff') format('woff'),
+    url('./assets/fonts/medium/BwModelicaMedium.ttf') format('truetype'),
+    url('./assets/fonts/medium/BwModelicaMedium.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
