@@ -1,9 +1,9 @@
-import { BarLoader } from "react-spinners";
+import { BarLoader } from 'react-spinners';
 
-export default function Loading({ loading }) {
+export default function Loading({ loading, color = '#ffffff' }) {
   return (
     <div className="flex items-center h-60v justify-center p-5 pb-14 gap-2.5 flex-auto w-full">
-      <BarLoader loading={loading} color="#ffffff" />
+      <BarLoader loading={loading} color={color} />
     </div>
   );
 }
