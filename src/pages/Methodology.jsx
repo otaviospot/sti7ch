@@ -1,9 +1,9 @@
-import { useEffect, useState, useContext } from 'react';
-import { apiGetPage, apiGetPostType } from '../services/apiService';
-import { MyContext } from '../MyContext';
-import style from './about-style.module.css';
-import Loading from '../components/Loading';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, useContext } from "react";
+import { apiGetPage, apiGetPostType } from "../services/apiService";
+import { MyContext } from "../MyContext";
+import style from "./about-style.module.css";
+import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 
 export default function Methodology() {
   const [pageContent, setPageContent] = useState({});
@@ -25,7 +25,7 @@ export default function Methodology() {
 
     async function getPostTypeContent() {
       try {
-        const backEndPTContent = await apiGetPostType('methodology');
+        const backEndPTContent = await apiGetPostType("methodology");
         const postsWithImages = await Promise.all(
           backEndPTContent.map(async (post) => {
             const imageUrl = post.featured_media

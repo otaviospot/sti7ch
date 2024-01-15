@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { apiGetPage, apiGetPostType } from '../services/apiService';
-import style from './about-style.module.css';
-import Loading from '../components/Loading';
-import { Link } from 'react-router-dom';
-import btn1Image from '../assets/images/btn1.webp';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { apiGetPage, apiGetPostType } from "../services/apiService";
+import style from "./about-style.module.css";
+import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
+import btn1Image from "../assets/images/btn1.webp";
 
 export default function About() {
   const [pageContent, setPageContent] = useState({});
   const [testimonialsContent, setTestimonialsContent] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
 
   useEffect(() => {
     async function getPageContent() {
       try {
         const backEndContent = await apiGetPage(17);
-        const backendTestimonials = await apiGetPostType('testimony');
+        const backendTestimonials = await apiGetPostType("testimony");
         setPageContent(backEndContent);
         setTestimonialsContent(backendTestimonials);
 
@@ -40,7 +40,7 @@ export default function About() {
   }, []);
 
   function extractTextFromHtml(html) {
-    const span = document.createElement('span');
+    const span = document.createElement("span");
     span.innerHTML = html;
     return span.textContent || span.innerText;
   }
@@ -48,7 +48,7 @@ export default function About() {
   function getFirstWords(html, qty) {
     const text = extractTextFromHtml(html);
     const words = text.split(/\s+/).slice(0, qty);
-    return words.join(' ');
+    return words.join(" ");
   }
 
   return (
@@ -68,17 +68,7 @@ export default function About() {
               ></div>
               <span
                 className={`absolute -right-60 bottom-0 flex w-[179px] h-[120px]`}
-              >
-                <Link
-                  className={`w-[179px] h-[120px] z-[2] font-modelicamed text-[31px] leading-[30px] flex items-center justify-center`}
-                  style={{ backgroundImage: `url(${btn1Image})` }}
-                  to="/"
-                >
-                  Ready to
-                  <br />
-                  Grow?
-                </Link>
-              </span>
+              ></span>
             </div>
           </>
         ) : (
