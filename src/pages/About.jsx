@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { apiGetPage, apiGetPostType } from "../services/apiService";
-import style from "./about-style.module.css";
-import Loading from "../components/Loading";
-import { Link } from "react-router-dom";
-import btn1Image from "../assets/images/btn1.webp";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { apiGetPage, apiGetPostType } from '../services/apiService';
+import style from './about-style.module.css';
+import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
+import btn1Image from '../assets/images/btn1.webp';
+import arrowDown from '../assets/images/arrowdown.svg';
+import { MdClose } from 'react-icons/md';
 
 export default function About() {
   const [pageContent, setPageContent] = useState({});
   const [testimonialsContent, setTestimonialsContent] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
+  const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+  const [isShowingAboutContent, setIsShowingAboutContent] = useState(false);
 
   useEffect(() => {
     async function getPageContent() {
       try {
         const backEndContent = await apiGetPage(17);
-        const backendTestimonials = await apiGetPostType("testimony");
+        const backendTestimonials = await apiGetPostType('testimony');
         setPageContent(backEndContent);
         setTestimonialsContent(backendTestimonials);
 
@@ -40,7 +43,7 @@ export default function About() {
   }, []);
 
   function extractTextFromHtml(html) {
-    const span = document.createElement("span");
+    const span = document.createElement('span');
     span.innerHTML = html;
     return span.textContent || span.innerText;
   }
@@ -48,11 +51,40 @@ export default function About() {
   function getFirstWords(html, qty) {
     const text = extractTextFromHtml(html);
     const words = text.split(/\s+/).slice(0, qty);
-    return words.join(" ");
+    return words.join(' ');
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    setIsShowingAboutContent(!isShowingAboutContent);
   }
 
   return (
     <>
+      <div
+        className={`fixed w-full h-dvh flex justify-center top-0 left-0 ${
+          isShowingAboutContent ? 'translate-x-[0]' : 'translate-x-[100vw]'
+        } transition-transform duration-500 ease-in-out z-[5] p-[75px] bg-white overflow-hidden`}
+      >
+        <span
+          onClick={handleClick}
+          className="absolute right-[75px] top-[75px] text-[25px] cursor-pointer"
+        >
+          <MdClose />
+        </span>
+        {!loading ? (
+          <>
+            <div
+              className={`${style.fullText} text-content max-w-[1100px] overflow-y-auto px-[30px]`}
+              dangerouslySetInnerHTML={{
+                __html: pageContent.acf.content_about,
+              }}
+            ></div>
+          </>
+        ) : (
+          <Loading loading={loading} />
+        )}
+      </div>
       <section className="flex flex-col justify-center items-start min-h-100v-h bg-orange-one p-[75px] overflow-hidden">
         {!loading ? (
           <>
@@ -91,8 +123,16 @@ export default function About() {
                 alt="Danubia"
                 src={featuredImageUrl}
               />
-              <div className="text-[4vw] w-3/4 font-modelicalight leading-[4.5vw] text-left pl-8">
-                "{getFirstWords(pageContent.acf.content_about, 17)}"
+              <div className="flex flex-col flex-grow w-3/4 items-center">
+                <div className="text-[4vw] w-full font-modelicalight leading-[4.5vw] text-left pl-8">
+                  "{getFirstWords(pageContent.acf.content_about, 17)}"
+                </div>
+                <span
+                  onClick={handleClick}
+                  className="cursor-pointer w-[30px] mt-8"
+                >
+                  <img alt="See more" className="w-[30px]" src={arrowDown} />
+                </span>
               </div>
             </div>
           </>

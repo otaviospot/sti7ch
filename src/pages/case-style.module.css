@@ -1,0 +1,44 @@
+.content {
+  position: relative;
+  width: 80%;
+}
+
+.content p {
+  font-size: 4vw;
+  line-height: 4.5vw;
+  text-align: left;
+  font-family: 'modelica-light', sans-serif;
+}
+
+.content strong {
+  font-family: 'modelica-bold', sans-serif;
+}
+
+.caseContent {
+  position: relative;
+  background-position: 0% 35%;
+}
+
+.caseItem {
+  position: relative;
+}
+
+.caseItem:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.caseItem:nth-child(even) {
+  align-self: flex-end;
+}
+
+.caseItem:nth-child(2) {
+  margin-top: 10%;
+}
+
+.caseItem:nth-child(3) {
+  margin-top: 10%;
+}
+
+.caseItem:last-child {
+  margin-bottom: 50px;
+}

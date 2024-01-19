@@ -67,7 +67,7 @@ export default function SingleMethodology() {
               [...methodologyContent].reverse().map((item, index) => (
                 <li
                   key={item.id}
-                  className="m-5 flex flex-col justify-center items-center"
+                  className="m-5 flex flex-col justify-center items-center w-full h-full"
                 >
                   <Link
                     to={`/methodology/${item.slug}`}

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.webp";
+import { Link } from 'react-router-dom';
+import logo from '../assets/images/logo.webp';
 
 export default function Header() {
   return (
@@ -20,10 +20,10 @@ export default function Header() {
               <Link to="/methodology">Methodology</Link>
             </li>
             <li className="text-black hover:text-blue-one text-[20px] uppercase">
-              <Link to="/">Case Studies</Link>
+              <Link to="/case-studies">Case Studies</Link>
             </li>
             <li className="text-black hover:text-blue-one text-[20px] uppercase">
-              <Link to="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </nav>
