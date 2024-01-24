@@ -4,11 +4,13 @@ import { apiGetPostType } from '../services/apiService';
 import { MyContext } from '../MyContext';
 import style from './singleMethodology-style.module.css';
 import Loading from '../components/Loading';
+import btn2Image from '../assets/images/btn2.webp';
 
 export default function SingleMethodology() {
   const [postContent, setPostContent] = useState({});
   const [loading, setLoading] = useState(true);
   const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+  const [nextLink, setNextLink] = useState('');
   const { slug } = useParams();
   const { methodologyContent, setMethodologyContent, fetchFeaturedImage } =
     useContext(MyContext);
@@ -44,10 +46,23 @@ export default function SingleMethodology() {
     setLoading(true);
     const fetchPostContent = async () => {
       if (methodologyContent.length > 0) {
-        const post = methodologyContent.find((p) => p.slug === slug);
-        if (post) {
+        const reversedContent = [...methodologyContent].reverse();
+        const currentIndex = reversedContent.findIndex((p) => p.slug === slug);
+
+        if (currentIndex !== -1) {
+          // Define o conteúdo do post atual
+          const post = reversedContent[currentIndex];
           setPostContent(post);
           setFeaturedImageUrl(post.imageUrl || '');
+
+          // Verifica se existe um próximo item
+          const nextIndex = currentIndex + 1;
+          if (nextIndex >= 0 && nextIndex < reversedContent.length) {
+            const nextItem = reversedContent[nextIndex];
+            setNextLink(nextItem.slug); // Atualiza o slug do próximo item
+          } else {
+            setNextLink(null); // Não existe próximo item
+          }
         }
       }
       setLoading(false);
@@ -61,13 +76,13 @@ export default function SingleMethodology() {
       <section
         className={`flex relative flex-col justify-center items-start min-h-100v-h bg-[#F6F5F3] p-[75px] overflow-hidden`}
       >
-        <div className="absolute top-0 right-0 z-[2]">
-          <ul className="flex">
+        <div className="absolute top-5 right-[75px] z-[2]">
+          <ul className={`${style.metList} flex`}>
             {methodologyContent &&
               [...methodologyContent].reverse().map((item, index) => (
                 <li
                   key={item.id}
-                  className="m-5 flex flex-col justify-center items-center w-full h-full"
+                  className="mx-2 flex flex-col justify-center items-center w-full h-full"
                 >
                   <Link
                     to={`/methodology/${item.slug}`}
@@ -80,7 +95,7 @@ export default function SingleMethodology() {
                         className="h-[75px]"
                       />
                     )}
-                    <h3 className="text-[20px] font-modelicabold text-center absolute text-white">
+                    <h3 className="text-[14px] font-modelicabold text-center absolute text-[#808080]">
                       {index + 1}
                     </h3>
                   </Link>
@@ -96,8 +111,14 @@ export default function SingleMethodology() {
               src={featuredImageUrl}
             />
             <div className="z-[2] flex w-full relative grow items-center justify-end">
-              <h1 className="text-[5vw] font-modelicabold text-left leading-[6vw] absolute bottom-10 left-0 w-[20%]">
-                {postContent.title && postContent.title.rendered}
+              <h1 className="text-[4vw] flex flex-col gap-3 font-modelicabold text-left leading-[6vw] absolute bottom-10 left-0">
+                <span className="text-[10vw]">
+                  {postContent.title &&
+                    postContent.title.rendered.substring(0, 2)}
+                </span>
+                <span>
+                  {postContent.title && postContent.title.rendered.substring(2)}
+                </span>
               </h1>
 
               <div
@@ -107,6 +128,29 @@ export default function SingleMethodology() {
                 }}
               ></div>
             </div>
+            {nextLink ? (
+              <span className={`absolute right-10 bottom-10 flex`}>
+                <Link
+                  className={`z-[2] font-modelicamed text-[31px] leading-[30px] flex items-center justify-center hover:underline`}
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                  to={`/methodology/${nextLink}`}
+                >
+                  {`next >`}
+                </Link>
+              </span>
+            ) : (
+              <Link
+                className={`absolute right-10 bottom-10 z-[2] font-modelicabold text-[35px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black`}
+                to="/contact"
+              >
+                <small className="text-[16px] font-modelicalight">
+                  Start moving toward your goals with a
+                </small>
+                <span>free consultation</span>
+              </Link>
+            )}
           </>
         ) : (
           <Loading loading={loading} color={'#54BCCA'} />

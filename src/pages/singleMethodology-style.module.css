@@ -22,3 +22,11 @@
   font-family: 'modelica-light', sans-serif;
   font-size: 28px;
 }
+
+.metList li:first-child h3 {
+  color: #b3b3b3;
+}
+
+.metList li:nth-child(5) img {
+  transform: translateX(10px);
+}

@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import { apiGetPage, apiGetPostType } from "../services/apiService";
-import { MyContext } from "../MyContext";
-import style from "./about-style.module.css";
-import Loading from "../components/Loading";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useContext } from 'react';
+import { apiGetPage, apiGetPostType } from '../services/apiService';
+import { MyContext } from '../MyContext';
+import style from './about-style.module.css';
+import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
+import btn2Image from '../assets/images/btn2.webp';
 
 export default function Methodology() {
   const [pageContent, setPageContent] = useState({});
@@ -25,7 +26,7 @@ export default function Methodology() {
 
     async function getPostTypeContent() {
       try {
-        const backEndPTContent = await apiGetPostType("methodology");
+        const backEndPTContent = await apiGetPostType('methodology');
         const postsWithImages = await Promise.all(
           backEndPTContent.map(async (post) => {
             const imageUrl = post.featured_media
@@ -50,13 +51,13 @@ export default function Methodology() {
 
   return (
     <>
-      <section className="flex flex-col justify-center items-start min-h-100v-h bg-pink-one p-[75px] overflow-hidden">
+      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-pink-one p-[75px] overflow-hidden">
         {!loading ? (
           <>
             <h1 className="text-[5vw] font-modelicabold text-left leading-[6vw] mb-5">
               {pageContent.title.rendered}
             </h1>
-            <div className={style.content}>
+            <div className={style.contentMet}>
               <div
                 className="text-content"
                 dangerouslySetInnerHTML={{
@@ -69,12 +70,8 @@ export default function Methodology() {
           <Loading loading={loading} />
         )}
       </section>
-      <section className="bg-bg-one w-full p-[75px] flex flex-col">
-        <h2 className="text-[5vw] font-modelicabold text-left leading-[6vw] mb-[100px]">
-          7-Step Methodology
-        </h2>
-
-        <ul className="flex">
+      <section className="bg-bg-one w-full p-[75px] pb-[25px] items-center flex flex-col relative">
+        <ul className="flex justify-between w-full">
           {!loading ? (
             <>
               {postTypeContent &&
@@ -105,6 +102,16 @@ export default function Methodology() {
             <Loading loading={loading} />
           )}
         </ul>
+
+        <Link
+          className={`z-[2] relative font-modelicamed text-[25px] mt-10 leading-[30px] flex items-center justify-center hover:underline`}
+          style={{
+            cursor: 'pointer',
+          }}
+          to="/case-studies"
+        >
+          {`See Case Studies >`}
+        </Link>
       </section>
     </>
   );

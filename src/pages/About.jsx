@@ -4,7 +4,7 @@ import { apiGetPage, apiGetPostType } from '../services/apiService';
 import style from './about-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
-import btn1Image from '../assets/images/btn1.webp';
+import btn2Image from '../assets/images/btn2.webp';
 import arrowDown from '../assets/images/arrowdown.svg';
 import { MdClose } from 'react-icons/md';
 
@@ -61,31 +61,7 @@ export default function About() {
 
   return (
     <>
-      <div
-        className={`fixed w-full h-dvh flex justify-center top-0 left-0 ${
-          isShowingAboutContent ? 'translate-x-[0]' : 'translate-x-[100vw]'
-        } transition-transform duration-500 ease-in-out z-[5] p-[75px] bg-white overflow-hidden`}
-      >
-        <span
-          onClick={handleClick}
-          className="absolute right-[75px] top-[75px] text-[25px] cursor-pointer"
-        >
-          <MdClose />
-        </span>
-        {!loading ? (
-          <>
-            <div
-              className={`${style.fullText} text-content max-w-[1100px] overflow-y-auto px-[30px]`}
-              dangerouslySetInnerHTML={{
-                __html: pageContent.acf.content_about,
-              }}
-            ></div>
-          </>
-        ) : (
-          <Loading loading={loading} />
-        )}
-      </div>
-      <section className="flex flex-col justify-center items-start min-h-100v-h bg-orange-one p-[75px] overflow-hidden">
+      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-orange-one p-[75px] overflow-hidden">
         {!loading ? (
           <>
             <h1 className="text-[5vw] font-modelicabold text-left leading-[6vw] mb-5">
@@ -98,9 +74,6 @@ export default function About() {
                   __html: pageContent.content.rendered,
                 }}
               ></div>
-              <span
-                className={`absolute -right-60 bottom-0 flex w-[179px] h-[120px]`}
-              ></span>
             </div>
           </>
         ) : (
@@ -117,19 +90,44 @@ export default function About() {
                 {pageContent.acf.title_about}
               </span>
             </h1>
-            <div className="flex mt-8 items-center justify-between">
+            <div className="flex mt-8 items-start justify-between">
               <img
                 className="w-1/4 h-auto"
                 alt="Danubia"
                 src={featuredImageUrl}
               />
               <div className="flex flex-col flex-grow w-3/4 items-center">
-                <div className="text-[4vw] w-full font-modelicalight leading-[4.5vw] text-left pl-8">
-                  "{getFirstWords(pageContent.acf.content_about, 17)}"
+                <div className="text-[30px] w-full font-modelicalight leading-[45px] text-left px-[40px] mt-[12%]">
+                  {getFirstWords(pageContent.acf.content_about, 36)}
+                </div>
+                <div
+                  className={`relative overflow-hidden w-full flex justify-center ${
+                    isShowingAboutContent
+                      ? 'max-h-[auto] opacity-100'
+                      : 'max-h-0 p-0 opacity-0'
+                  } transition-all duration-500 ease-in-out z-[5] overflow-hidden`}
+                >
+                  {!loading ? (
+                    <>
+                      <div
+                        className={`${style.fullText} text-content w-full px-[40px] overflow-y-auto`}
+                        dangerouslySetInnerHTML={{
+                          __html: pageContent.acf.content_about
+                            .split(' ')
+                            .slice(35)
+                            .join(' '),
+                        }}
+                      ></div>
+                    </>
+                  ) : (
+                    <Loading loading={loading} />
+                  )}
                 </div>
                 <span
                   onClick={handleClick}
-                  className="cursor-pointer w-[30px] mt-8"
+                  className={`cursor-pointer w-[30px] mt-8 ${
+                    isShowingAboutContent ? 'rotate-180' : ''
+                  }`}
                 >
                   <img alt="See more" className="w-[30px]" src={arrowDown} />
                 </span>
@@ -141,12 +139,12 @@ export default function About() {
         )}
       </section>
       <section
-        className={`${style.testimonials} flex flex-col justify-center items-center bg-bg-one p-[75px] overflow-hidden`}
+        className={`${style.testimonials} relative flex flex-col justify-center items-center bg-bg-one p-[75px] overflow-hidden`}
       >
         {!loading ? (
           <>
             {testimonialsContent &&
-              testimonialsContent.map((testimony) => (
+              [...testimonialsContent].reverse().map((testimony) => (
                 <div
                   className={`${style.testimony} flex flex-col mt-8 w-2/5 items-left justify-between text-left`}
                 >
@@ -165,6 +163,19 @@ export default function About() {
         ) : (
           <Loading loading={loading} />
         )}
+        <span className={`absolute right-10 bottom-10 flex `}>
+          <Link
+            className={`z-[2] font-modelicamed text-[25px] leading-[30px] flex items-center justify-center`}
+            style={{
+              cursor: 'pointer',
+            }}
+            to="/methodology"
+          >
+            See How
+            <br />
+            We Work Together
+          </Link>
+        </span>
       </section>
     </>
   );

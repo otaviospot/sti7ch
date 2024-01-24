@@ -3,7 +3,13 @@
   width: 80%;
 }
 
-.content p {
+.contentMet {
+  position: relative;
+  width: 75%;
+}
+
+.content p,
+.contentMet p {
   font-size: 3vw;
   line-height: 3.5vw;
   text-align: left;
@@ -11,7 +17,8 @@
   margin-bottom: 30px;
 }
 
-.content strong {
+.content strong,
+.contentMet strong {
   font-family: 'modelica-bold', sans-serif;
 }
 
@@ -43,7 +50,7 @@
   height: 170%;
   background-image: url(../assets/images/bg-testimony1.webp);
   top: -20%;
-  left: -30%;
+  left: -20%;
 }
 
 .testimonials .testimony:nth-child(2) {
@@ -52,8 +59,8 @@
 }
 
 .testimonials .testimony:nth-child(2):before {
-  width: 170%;
-  height: 170%;
+  width: 220%;
+  height: 220%;
   background-image: url(../assets/images/bg-testimony2.webp);
   top: -60%;
   left: -10%;
@@ -61,20 +68,20 @@
 
 .testimonials .testimony:nth-child(3) {
   position: relative;
-  transform: translate3d(-58%, -50%, 0);
+  transform: translate3d(-58%, -40%, 0);
 }
 
 .testimonials .testimony:nth-child(3):before {
   width: 170%;
   height: 170%;
   background-image: url(../assets/images/bg-testimony3.webp);
-  top: -60%;
-  left: 10%;
+  top: -20%;
+  left: 5%;
 }
 
 .testimonials .testimony:nth-child(4) {
   position: relative;
-  transform: translate3d(20%, -50%, 0);
+  transform: translate3d(20%, -40%, 0);
 }
 
 .testimonials .testimony:nth-child(4):before {
