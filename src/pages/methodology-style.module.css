@@ -1,0 +1,16 @@
+.contentMet {
+  position: relative;
+  width: 75%;
+}
+
+.contentMet p {
+  font-size: 3vw;
+  line-height: 3.5vw;
+  text-align: left;
+  font-family: 'modelica-light', sans-serif;
+  margin-bottom: 30px;
+}
+
+.contentMet strong {
+  font-family: 'modelica-bold', sans-serif;
+}

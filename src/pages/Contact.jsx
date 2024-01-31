@@ -6,6 +6,8 @@ import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
 import btn4Img from '../assets/images/btn4.webp';
 import logo from '../assets/images/logo-bot.svg';
+import { FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { HiOutlineMailOpen } from 'react-icons/hi';
 
 export default function Contact() {
   const [pageContent, setPageContent] = useState({});
@@ -25,6 +27,7 @@ export default function Contact() {
   useEffect(() => {
     async function getPageContent() {
       try {
+        window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(70);
         setPageContent(backEndContent);
         setLoading(false);
@@ -57,11 +60,37 @@ export default function Contact() {
           <Loading loading={loading} />
         )}
       </section>
-      <section className="flex justify-start gap-[80px] items-start bg-white p-[75px] overflow-hidden">
-        <div className="flex flex-0-auto items-end justify-start">
+      <section className="flex justify-start gap-[80px] bg-white p-[75px] overflow-hidden">
+        <div className="flex flex-col flex-0-auto items-start justify-between">
           <Link className="" to="/">
             <img alt="Sti7ch logo" className="w-[30vw]" src={logo} />
           </Link>
+          <nav className="flex gap-5 font-modelicamed text-[22px] items-start justify-start">
+            <a
+              className="hover:text-pink-one"
+              rel="noreferrer"
+              target="_blank"
+              href="https://intagram.com/_sti7ch"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              className="hover:text-pink-one"
+              rel="noreferrer"
+              target="_blank"
+              href="https://linkedin.com/company/sti7ch"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              className="hover:text-pink-one"
+              rel="noreferrer"
+              target="_blank"
+              href="mailto:info@sti7ch.com"
+            >
+              <HiOutlineMailOpen />
+            </a>
+          </nav>
         </div>
         <div className="w-full">
           <form

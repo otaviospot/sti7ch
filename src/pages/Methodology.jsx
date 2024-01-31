@@ -1,10 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { apiGetPage, apiGetPostType } from '../services/apiService';
 import { MyContext } from '../MyContext';
-import style from './about-style.module.css';
+import style from './methodology-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
 import btn2Image from '../assets/images/btn2.webp';
+import MethodologyItem from '../components/MethodologyItem';
 
 export default function Methodology() {
   const [pageContent, setPageContent] = useState({});
@@ -15,6 +16,7 @@ export default function Methodology() {
   useEffect(() => {
     async function getPageContent() {
       try {
+        window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(37);
         setPageContent(backEndContent);
 
@@ -70,33 +72,14 @@ export default function Methodology() {
           <Loading loading={loading} />
         )}
       </section>
-      <section className="bg-bg-one w-full p-[75px] pb-[25px] items-center flex flex-col relative">
+      <section className="bg-bg-one w-full p-[75px] pb-[25px] items-end flex flex-col relative">
         <ul className="flex justify-between w-full">
           {!loading ? (
             <>
               {postTypeContent &&
-                [...postTypeContent].reverse().map((item) => (
-                  <li
-                    key={item.id}
-                    className="m-5 flex flex-col justify-center"
-                  >
-                    <Link
-                      to={item.slug}
-                      className="flex flex-col justify-center items-center"
-                    >
-                      {item.imageUrl && (
-                        <img
-                          src={item.imageUrl}
-                          alt={item.title.rendered}
-                          className="mb-3 h-[150px]"
-                        />
-                      )}
-                      <h3 className="text-[20px] font-modelicabold text-center mb-5">
-                        {item.title.rendered}
-                      </h3>
-                    </Link>
-                  </li>
-                ))}
+                [...postTypeContent]
+                  .reverse()
+                  .map((item) => <MethodologyItem item={item} />)}
             </>
           ) : (
             <Loading loading={loading} />
@@ -104,7 +87,7 @@ export default function Methodology() {
         </ul>
 
         <Link
-          className={`z-[2] relative font-modelicamed text-[25px] mt-10 leading-[30px] flex items-center justify-center hover:underline`}
+          className={`z-[2] relative font-modelicamed text-[20px] mt-10 leading-[30px] flex items-center justify-center hover:underline`}
           style={{
             cursor: 'pointer',
           }}

@@ -1,10 +1,28 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { apiGetPostType } from '../services/apiService';
 import { MyContext } from '../MyContext';
 import style from './singleMethodology-style.module.css';
 import Loading from '../components/Loading';
 import btn2Image from '../assets/images/btn2.webp';
+
+import { ReactComponent as SvgComponent1 } from '../assets/images/svgs/met-1-animated-.svg';
+import { ReactComponent as SvgComponent2 } from '../assets/images/svgs/met-2-animated.svg';
+import { ReactComponent as SvgComponent3 } from '../assets/images/svgs/met-3-animated.svg';
+import { ReactComponent as SvgComponent4 } from '../assets/images/svgs/met-4-animated.svg';
+import { ReactComponent as SvgComponent5 } from '../assets/images/svgs/met-5-animated.svg';
+import { ReactComponent as SvgComponent6 } from '../assets/images/svgs/met-6-animated.svg';
+import { ReactComponent as SvgComponent7 } from '../assets/images/svgs/met-7-animated.svg';
+
+const svgMapping = {
+  1: SvgComponent1,
+  2: SvgComponent2,
+  3: SvgComponent3,
+  4: SvgComponent4,
+  5: SvgComponent5,
+  6: SvgComponent6,
+  7: SvgComponent7,
+};
 
 export default function SingleMethodology() {
   const [postContent, setPostContent] = useState({});
@@ -17,6 +35,7 @@ export default function SingleMethodology() {
 
   useEffect(() => {
     const fetchContent = async () => {
+      window.scrollTo(0, 0);
       setLoading(true);
 
       if (!methodologyContent.length) {
@@ -105,11 +124,21 @@ export default function SingleMethodology() {
         </div>
         {!loading ? (
           <>
-            <img
-              className="absolute z-[1] h-[110%] -translate-x-[20%] translate-y-[5%]"
-              alt={postContent.title && postContent.title.rendered}
-              src={featuredImageUrl}
-            />
+            <span
+              className={`absolute z-[1] h-[110%] -translate-x-[30%] ${
+                postContent.title &&
+                postContent.title.rendered.substring(0, 1) === '4'
+                  ? 'translate-y-[10%]'
+                  : 'translate-y-[5%]'
+              }`}
+            >
+              {postContent.title &&
+              svgMapping[Number(postContent.title.rendered.substr(0, 1))]
+                ? React.createElement(
+                    svgMapping[Number(postContent.title.rendered.substr(0, 1))]
+                  )
+                : null}
+            </span>
             <div className="z-[2] flex w-full relative grow items-center justify-end">
               <h1 className="text-[4vw] flex flex-col gap-3 font-modelicabold text-left leading-[6vw] absolute bottom-10 left-0">
                 <span className="text-[10vw]">
@@ -142,11 +171,11 @@ export default function SingleMethodology() {
               </span>
             ) : (
               <Link
-                className={`absolute right-10 bottom-10 z-[2] font-modelicabold text-[35px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black`}
+                className={`absolute right-10 bottom-10 z-[2] font-modelicabold text-[24px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black hover:bg-blue-one hover:text-black`}
                 to="/contact"
               >
-                <small className="text-[16px] font-modelicalight">
-                  Start moving toward your goals with a
+                <small className="text-[15px] font-modelicamed">
+                  Move toward your goals with a
                 </small>
                 <span>free consultation</span>
               </Link>

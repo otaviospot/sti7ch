@@ -30,3 +30,8 @@
 .metList li:nth-child(5) img {
   transform: translateX(10px);
 }
+
+.svgContainer svg {
+  height: 100%;
+  width: auto;
+}

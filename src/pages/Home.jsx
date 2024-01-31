@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex flex-col justify-center items-start min-h-100v-h bg-blue-one p-[75px] overflow-hidden">
+      <section className="flex relative flex-col justify-center items-start min-h-100v-h bg-blue-one p-[75px] overflow-hidden">
         {!loading ? (
           <>
             <h1 className="text-[5vw] font-modelicabold">
@@ -38,20 +38,20 @@ export default function Home() {
                   __html: pageContent.content.rendered,
                 }}
               ></div>
-              <span
-                className={`${style.btn1} absolute -right-60 flex w-[179px] h-[120px] scale-[.8]`}
-              >
-                <Link
-                  className={`btn-1 w-[179px] h-[120px] z-[2] font-modelicamed text-[28px] leading-[30px] flex items-center justify-center`}
-                  style={{ backgroundImage: `url(${btn1Image})` }}
-                  to="/about"
-                >
-                  Ready to
-                  <br />
-                  Grow?
-                </Link>
-              </span>
             </div>
+            <span
+              className={`${style.btn1} absolute right-[20px] flex w-[179px] h-[120px] scale-[.8]`}
+            >
+              <Link
+                className={`btn-1 w-[179px] h-[120px] z-[2] font-modelicamed text-[28px] leading-[30px] flex items-center justify-center`}
+                style={{ backgroundImage: `url(${btn1Image})` }}
+                to="/about"
+              >
+                Ready to
+                <br />
+                Grow?
+              </Link>
+            </span>
           </>
         ) : (
           <Loading loading={loading} />

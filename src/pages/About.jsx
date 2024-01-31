@@ -18,6 +18,7 @@ export default function About() {
   useEffect(() => {
     async function getPageContent() {
       try {
+        window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(17);
         const backendTestimonials = await apiGetPostType('testimony');
         setPageContent(backEndContent);
@@ -165,15 +166,13 @@ export default function About() {
         )}
         <span className={`absolute right-10 bottom-10 flex `}>
           <Link
-            className={`z-[2] font-modelicamed text-[25px] leading-[30px] flex items-center justify-center`}
+            className={`z-[2] text-[20px] border-[1.5px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
             style={{
               cursor: 'pointer',
             }}
             to="/methodology"
           >
-            See How
-            <br />
-            We Work Together
+            See How We Work Together
           </Link>
         </span>
       </section>

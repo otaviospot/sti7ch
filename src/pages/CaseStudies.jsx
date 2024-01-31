@@ -6,7 +6,7 @@ import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
 import btn3Image from '../assets/images/btn3.webp';
 import bgCase from '../assets/images/bg-cases.svg';
-import arrowDown from '../assets/images/arrowdown.svg';
+import SingleCase from '../components/SingleCase';
 
 export default function CaseStudies() {
   const [pageContent, setPageContent] = useState({});
@@ -17,6 +17,7 @@ export default function CaseStudies() {
   useEffect(() => {
     async function getPageContent() {
       try {
+        window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(61);
         const postTypeBackEndContent = await apiGetPostType('case');
         setPageContent(backEndContent);
@@ -58,22 +59,13 @@ export default function CaseStudies() {
         style={{
           backgroundImage: `url(${bgCase})`,
         }}
-        className={`${style.caseContent} flex flex-col justify-start min-h-100v-h  bg-contain bg-no-repeat items-center bg-blue-one px-[75px] py-[20px] overflow-hidden`}
+        className={`${style.caseContent} flex flex-col justify-start min-h-100v-h  bg-contain bg-no-repeat items-center bg-blue-one px-[75px] py-[20px] pb-[200px] overflow-hidden`}
       >
         {!loading ? (
           <>
             {caseContent &&
               caseContent.map((singlecase) => (
-                <div
-                  className={` ${style.caseItem} flex flex-col mt-8 w-1/3 items-center text-left`}
-                >
-                  <span className="font-modelicalight text-[2vw]">
-                    {singlecase.title.rendered}
-                  </span>
-                  <Link className="mt-[30px]" to={singlecase.slug}>
-                    <img alt="See more" className="w-[20px]" src={arrowDown} />
-                  </Link>
-                </div>
+                <SingleCase singlecase={singlecase} />
               ))}
           </>
         ) : (

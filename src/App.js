@@ -10,7 +10,6 @@ import About from './pages/About';
 import Methodology from './pages/Methodology';
 import SingleMethodology from './pages/SingleMethodology';
 import CaseStudies from './pages/CaseStudies';
-import SingleCase from './pages/SingleCase';
 import Contact from './pages/Contact';
 
 function App() {
@@ -30,7 +29,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App pt-[80px]">
       <MyContext.Provider
         value={{
           methodologyContent,
@@ -48,7 +47,6 @@ function App() {
             <Route path="/methodology" element={<Methodology />} />
             <Route path="/methodology/:slug" element={<SingleMethodology />} />
             <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/case-studies/:slug" element={<SingleCase />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Router>

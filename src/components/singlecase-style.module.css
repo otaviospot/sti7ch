@@ -1,0 +1,41 @@
+.caseItem {
+  position: relative;
+}
+
+.caseItem:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.caseItem:nth-child(even) {
+  align-self: flex-end;
+}
+
+.caseItem:nth-child(2) {
+  margin-top: 10%;
+}
+
+.caseItem:nth-child(3) {
+  margin-top: 10%;
+}
+
+.caseItem:last-child {
+  margin-bottom: 50px;
+}
+
+.caseItem:nth-child(3) .popUpSingleCase {
+  transform: translateY(-30%);
+}
+
+.contentPopUp p {
+  font-size: 18px;
+  font-family: 'modelica-med', sans-serif;
+}
+
+.contentPopUp strong {
+  font-family: 'modelica-bold', sans-serif;
+  font-style: italic;
+}
+
+.popUpSingleCase {
+  background: rgba(255, 255, 255, 0.8);
+}

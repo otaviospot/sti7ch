@@ -16,16 +16,16 @@
 
 .btn1 {
   position: absolute;
-  bottom: -55%;
+  bottom: 20px;
 }
 
 .btn1:before {
   content: '';
-  width: 699px;
-  height: 189px;
-  background-image: url(../assets/images/line-btn1.webp);
+  width: 1082px;
+  height: 233px;
+  background-image: url(../assets/images/line-btn1-2.webp);
   position: absolute;
   display: block;
-  left: -105%;
+  right: -110%;
   top: -55%;
 }
