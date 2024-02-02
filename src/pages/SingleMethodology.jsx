@@ -160,7 +160,7 @@ export default function SingleMethodology() {
             {nextLink ? (
               <span className={`absolute right-10 bottom-10 flex`}>
                 <Link
-                  className={`z-[2] font-modelicamed text-[31px] leading-[30px] flex items-center justify-center hover:underline`}
+                  className={`z-[2] font-modelicamed text-[25px] leading-[30px] flex items-center justify-center hover:underline`}
                   style={{
                     cursor: 'pointer',
                   }}
@@ -171,10 +171,10 @@ export default function SingleMethodology() {
               </span>
             ) : (
               <Link
-                className={`absolute right-10 bottom-10 z-[2] font-modelicabold text-[24px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black hover:bg-blue-one hover:text-black`}
+                className={`absolute right-10 bottom-10 z-[2] font-modelicabold text-[21px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black hover:bg-blue-one hover:text-black`}
                 to="/contact"
               >
-                <small className="text-[15px] font-modelicamed">
+                <small className="text-[13px] font-modelicamed">
                   Move toward your goals with a
                 </small>
                 <span>free consultation</span>

@@ -3,7 +3,7 @@ import { apiGetPage } from '../services/apiService';
 import style from './home-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
-import btn1Image from '../assets/images/btn1.webp';
+import btn1Image from '../assets/images/btn1-2.webp';
 
 export default function Home() {
   const [pageContent, setPageContent] = useState({});
@@ -40,10 +40,10 @@ export default function Home() {
               ></div>
             </div>
             <span
-              className={`${style.btn1} absolute right-[20px] flex w-[179px] h-[120px] scale-[.8]`}
+              className={`${style.btn1} absolute right-[20px] flex w-[152px] h-[132px] scale-[.9] transition-all ease-linear duration-500 hover:scale-100`}
             >
               <Link
-                className={`btn-1 w-[179px] h-[120px] z-[2] font-modelicamed text-[28px] leading-[30px] flex items-center justify-center`}
+                className={`btn-1 w-[152px] h-[132px] z-[2] font-modelicamed text-[28px] leading-[30px] flex items-center justify-center`}
                 style={{ backgroundImage: `url(${btn1Image})` }}
                 to="/about"
               >

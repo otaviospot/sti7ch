@@ -21,11 +21,12 @@
 
 .btn1:before {
   content: '';
-  width: 1082px;
-  height: 233px;
-  background-image: url(../assets/images/line-btn1-2.webp);
+  width: 346px;
+  height: 209px;
+  background-image: url(../assets/images/line-btn1-3.webp);
+  background-size: contain;
   position: absolute;
   display: block;
   right: -110%;
-  top: -55%;
+  top: -25%;
 }

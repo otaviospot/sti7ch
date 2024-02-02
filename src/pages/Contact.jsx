@@ -44,7 +44,7 @@ export default function Contact() {
       <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-pink-one p-[75px] overflow-hidden">
         {!loading ? (
           <>
-            <h1 className="text-[5vw] font-modelicabold text-left">
+            <h1 className="text-[4.5vw] font-modelicabold text-left">
               {pageContent.title.rendered}
             </h1>
             <div className={style.content}>
@@ -61,7 +61,7 @@ export default function Contact() {
         )}
       </section>
       <section className="flex justify-start gap-[80px] bg-white p-[75px] overflow-hidden">
-        <div className="flex flex-col flex-0-auto items-start justify-between">
+        <div className="flex flex-col flex-0-auto pt-[40px] pb-[40px] gap-[40px] items-start">
           <Link className="" to="/">
             <img alt="Sti7ch logo" className="w-[30vw]" src={logo} />
           </Link>
@@ -97,7 +97,7 @@ export default function Contact() {
             className="flex flex-col gap-9 w-full font-modelicamed"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[120px] flex flex-col">
+            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[100px] flex flex-col">
               <label className="font-modelicamed text-[20px]">Name</label>
               <input
                 className="grow"
@@ -107,7 +107,7 @@ export default function Contact() {
                 <span className="text-pink-one">This field is required</span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[120px] flex flex-col">
+            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[100px] flex flex-col">
               <label className="font-modelicamed text-[20px]">Email</label>
               <input
                 className="grow"

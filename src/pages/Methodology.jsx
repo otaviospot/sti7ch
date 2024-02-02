@@ -87,7 +87,7 @@ export default function Methodology() {
         </ul>
 
         <Link
-          className={`z-[2] relative font-modelicamed text-[20px] mt-10 leading-[30px] flex items-center justify-center hover:underline`}
+          className={`z-[2] text-[20px] border-[1.5px] mt-[40px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
           style={{
             cursor: 'pointer',
           }}
