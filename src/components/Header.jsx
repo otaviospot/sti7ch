@@ -1,8 +1,12 @@
-import { NavLink } from 'react-router-dom';
-import logo from '../assets/images/logo.webp';
-import style from './header-style.module.css';
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/images/logo.webp";
+import style from "./header-style.module.css";
+import { MyContext } from "../MyContext";
 
 export default function Header() {
+  const { language, handleLanguageChange } = useContext(MyContext);
+
   return (
     <header className="w-full fixed top-0 bg-white flex flex-row items-center justify-between z-20 h-[80px] px-[75px] pt-[15px]">
       <div className="flex flex-0-auto items-center">
@@ -11,7 +15,17 @@ export default function Header() {
         </NavLink>
       </div>
 
-      <div className="flex items-center flex-1 justify-end gap-5">
+      <div className="flex relative items-center flex-1 justify-end gap-5">
+        <div className="absolute -right-[20px] -top-[20px] text-[11px]">
+          <select
+            className="border-none appearance-none"
+            onChange={handleLanguageChange}
+            value={language}
+          >
+            <option value="en">english</option>
+            <option value="pt">portuguese</option>
+          </select>
+        </div>
         <nav className="flex flex-0-auto translate-y-3">
           <ul
             className={`${style.navigationList} flex flex-row items-center justify-end gap-12`}
@@ -20,8 +34,8 @@ export default function Header() {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? 'font-modelicabold'
-                    : 'font-modelicamed hover:font-bold'
+                    ? "font-modelicabold"
+                    : "font-modelicamed hover:font-bold"
                 }
                 to="/about"
               >
@@ -32,8 +46,8 @@ export default function Header() {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? 'font-modelicabold'
-                    : 'font-modelicamed hover:font-bold'
+                    ? "font-modelicabold"
+                    : "font-modelicamed hover:font-bold"
                 }
                 to="/methodology"
               >
@@ -44,8 +58,8 @@ export default function Header() {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? 'font-modelicabold'
-                    : 'font-modelicamed hover:font-bold'
+                    ? "font-modelicabold"
+                    : "font-modelicamed hover:font-bold"
                 }
                 to="/case-studies"
               >
@@ -56,8 +70,8 @@ export default function Header() {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? 'font-modelicabold'
-                    : 'font-modelicamed hover:font-bold'
+                    ? "font-modelicabold"
+                    : "font-modelicamed hover:font-bold"
                 }
                 to="/contact"
               >

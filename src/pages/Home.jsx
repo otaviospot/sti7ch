@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { apiGetPage } from '../services/apiService';
-import style from './home-style.module.css';
-import Loading from '../components/Loading';
-import { Link } from 'react-router-dom';
-import btn1Image from '../assets/images/btn1-2.webp';
+import { useEffect, useState } from "react";
+import { apiGetPage } from "../services/apiService";
+import style from "./home-style.module.css";
+import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
+import btn1Image from "../assets/images/btn1-2.webp";
 
 export default function Home() {
   const [pageContent, setPageContent] = useState({});

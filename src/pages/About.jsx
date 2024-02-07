@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { apiGetPage, apiGetPostType } from '../services/apiService';
-import style from './about-style.module.css';
-import Loading from '../components/Loading';
-import { Link } from 'react-router-dom';
-import btn2Image from '../assets/images/btn2.webp';
-import arrowDown from '../assets/images/arrowdown.svg';
-import { MdClose } from 'react-icons/md';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { apiGetPage, apiGetPostType } from "../services/apiService";
+import style from "./about-style.module.css";
+import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
+import arrowDown from "../assets/images/arrowdown.svg";
 
 export default function About() {
   const [pageContent, setPageContent] = useState({});
   const [testimonialsContent, setTestimonialsContent] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
   const [isShowingAboutContent, setIsShowingAboutContent] = useState(false);
 
   useEffect(() => {
@@ -20,7 +18,7 @@ export default function About() {
       try {
         window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(17);
-        const backendTestimonials = await apiGetPostType('testimony');
+        const backendTestimonials = await apiGetPostType("testimony");
         setPageContent(backEndContent);
         setTestimonialsContent(backendTestimonials);
 
@@ -44,7 +42,7 @@ export default function About() {
   }, []);
 
   function extractTextFromHtml(html) {
-    const span = document.createElement('span');
+    const span = document.createElement("span");
     span.innerHTML = html;
     return span.textContent || span.innerText;
   }
@@ -52,7 +50,7 @@ export default function About() {
   function getFirstWords(html, qty) {
     const text = extractTextFromHtml(html);
     const words = text.split(/\s+/).slice(0, qty);
-    return words.join(' ');
+    return words.join(" ");
   }
 
   function handleClick(event) {
@@ -104,8 +102,8 @@ export default function About() {
                 <div
                   className={`relative overflow-hidden w-full flex justify-center ${
                     isShowingAboutContent
-                      ? 'max-h-[auto] opacity-100'
-                      : 'max-h-0 p-0 opacity-0'
+                      ? "max-h-[auto] opacity-100"
+                      : "max-h-0 p-0 opacity-0"
                   } transition-all duration-500 ease-in-out z-[5] overflow-hidden`}
                 >
                   {!loading ? (
@@ -114,9 +112,9 @@ export default function About() {
                         className={`${style.fullText} text-content w-full px-[40px] overflow-y-auto`}
                         dangerouslySetInnerHTML={{
                           __html: pageContent.acf.content_about
-                            .split(' ')
+                            .split(" ")
                             .slice(35)
-                            .join(' '),
+                            .join(" "),
                         }}
                       ></div>
                     </>
@@ -127,7 +125,7 @@ export default function About() {
                 <span
                   onClick={handleClick}
                   className={`cursor-pointer w-[30px] mt-8 ${
-                    isShowingAboutContent ? 'rotate-180' : ''
+                    isShowingAboutContent ? "rotate-180" : ""
                   }`}
                 >
                   <img alt="See more" className="w-[30px]" src={arrowDown} />
@@ -168,7 +166,7 @@ export default function About() {
           <Link
             className={`z-[2] text-[20px] border-[1.5px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
             style={{
-              cursor: 'pointer',
+              cursor: "pointer",
             }}
             to="/methodology"
           >
