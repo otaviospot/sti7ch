@@ -52,7 +52,7 @@ export default function MethodologyItem({ item }) {
   return (
     <li
       key={item.id}
-      className={`${style.metListItem} w-[14%] grow-0 group flex-0-auto relative flex flex-col justify-center`}
+      className={`${style.metListItem} w-full md:w-[14%] grow-0 group flex-0-auto relative flex flex-col justify-center`}
     >
       <Link
         to={item.slug}

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import btn2Image from '../assets/images/btn2.webp';
 import arrowDown from '../assets/images/arrowdown.svg';
 import { MdClose } from 'react-icons/md';
+import { PageMainContent } from '../components/PageMainContent';
 
 export default function About() {
   const [pageContent, setPageContent] = useState({});
@@ -62,43 +63,37 @@ export default function About() {
 
   return (
     <>
-      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-orange-one p-[75px] overflow-hidden">
+      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-orange-one px-[20px] py-[35px] md:p-[75px] overflow-hidden">
         {!loading ? (
           <>
-            <h1 className="text-[5vw] font-modelicabold text-left leading-[6vw] mb-5">
-              {pageContent.title.rendered}
-            </h1>
-            <div className={style.content}>
-              <div
-                className="text-content"
-                dangerouslySetInnerHTML={{
-                  __html: pageContent.content.rendered,
-                }}
-              ></div>
-            </div>
+            <PageMainContent
+              title={pageContent.title.rendered}
+              content={pageContent.content.rendered}
+              style={style.content}
+            />
           </>
         ) : (
           <Loading loading={loading} />
         )}
       </section>
-      <section className="flex flex-col justify-center items-start bg-bg-one p-[75px] overflow-hidden">
+      <section className="flex flex-col justify-center items-start bg-bg-one px-[20px] py-[35px] md:p-[75px] overflow-hidden">
         {!loading ? (
           <>
-            <h1 className="font-modelicalight text-[5vw] leading-[5.5vw] text-left">
+            <h1 className="font-modelicalight text-[10vw] leading-[10vw] md:text-[5vw] md:leading-[5.5vw] text-left">
               <strong className="font-modelicabold">Sti7ch</strong> is
               <br />
-              <span className="text-[5.5vw]">
+              <span className="text-[10vw] md:text-[5.5vw]">
                 {pageContent.acf.title_about}
               </span>
             </h1>
-            <div className="flex mt-8 items-start justify-between">
+            <div className="flex mt-8 items-start justify-between flex-col md:flex-row">
               <img
-                className="w-1/4 h-auto"
+                className="w-full md:w-1/4 h-auto"
                 alt="Danubia"
                 src={featuredImageUrl}
               />
-              <div className="flex flex-col flex-grow w-3/4 items-center">
-                <div className="text-[30px] w-full font-modelicalight leading-[45px] text-left px-[40px] mt-[12%]">
+              <div className="flex flex-col flex-grow w-full md:w-3/4 items-center">
+                <div className="text-[30px] w-full font-modelicalight leading-[45px] text-left px-0 md:px-[40px] mt-[12%]">
                   {getFirstWords(pageContent.acf.content_about, 36)}
                 </div>
                 <div
@@ -111,7 +106,7 @@ export default function About() {
                   {!loading ? (
                     <>
                       <div
-                        className={`${style.fullText} text-content w-full px-[40px] overflow-y-auto`}
+                        className={`${style.fullText} text-content w-full px-0 md:px-[40px] overflow-y-auto`}
                         dangerouslySetInnerHTML={{
                           __html: pageContent.acf.content_about
                             .split(' ')
@@ -140,22 +135,22 @@ export default function About() {
         )}
       </section>
       <section
-        className={`${style.testimonials} relative flex flex-col justify-center items-center bg-bg-one p-[75px] overflow-hidden`}
+        className={`${style.testimonials} relative flex flex-col gap-40 md:gap-0 justify-center items-center bg-bg-one px-[20px] py-[35px] md:p-[75px] overflow-hidden`}
       >
         {!loading ? (
           <>
             {testimonialsContent &&
               [...testimonialsContent].reverse().map((testimony) => (
                 <div
-                  className={`${style.testimony} flex flex-col mt-8 w-2/5 items-left justify-between text-left`}
+                  className={`${style.testimony} flex flex-col mt-8 w-full md:w-2/5 items-left justify-between text-left`}
                 >
                   <div
-                    className="w-full font-modelicalight text-[2vw]"
+                    className="w-full font-modelicalight text-[6vw] md:text-[2vw]"
                     dangerouslySetInnerHTML={{
                       __html: testimony.content.rendered,
                     }}
                   ></div>
-                  <span className="font-modelicabold text-[1.5vw]">
+                  <span className="font-modelicabold text-[5.5vw] md:text-[1.5vw]">
                     {testimony.title.rendered}
                   </span>
                 </div>
@@ -164,9 +159,11 @@ export default function About() {
         ) : (
           <Loading loading={loading} />
         )}
-        <span className={`absolute right-10 bottom-10 flex `}>
+        <span
+          className={`relative w-full md:w-auto md:absolute md:right-10 md:bottom-10 flex `}
+        >
           <Link
-            className={`z-[2] text-[20px] border-[1.5px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
+            className={`z-[2] w-full md:w-auto  text-[20px] border-[1.5px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
             style={{
               cursor: 'pointer',
             }}

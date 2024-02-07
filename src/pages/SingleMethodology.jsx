@@ -93,9 +93,9 @@ export default function SingleMethodology() {
   return (
     <>
       <section
-        className={`flex relative flex-col justify-center items-start min-h-100v-h bg-[#F6F5F3] p-[75px] overflow-hidden`}
+        className={`flex relative flex-col justify-center items-start min-h-100v-h bg-[#F6F5F3] px-[20px] py-[35px] md:p-[75px] overflow-hidden`}
       >
-        <div className="absolute top-5 right-[75px] z-[2]">
+        <div className="relative w-full md:absolute md:w-auto md:top-5 md:right-[75px] z-[2]">
           <ul className={`${style.metList} flex`}>
             {methodologyContent &&
               [...methodologyContent].reverse().map((item, index) => (
@@ -125,11 +125,11 @@ export default function SingleMethodology() {
         {!loading ? (
           <>
             <span
-              className={`absolute z-[1] h-[110%] -translate-x-[30%] ${
+              className={`absolute z-[1] h-[80vh] md:h-[110%] w-[180vw] md:w-auto bottom-0 md:bottom-[initial] -translate-x-[50%] md:-translate-x-[30%] ${
                 postContent.title &&
                 postContent.title.rendered.substring(0, 1) === '4'
-                  ? 'translate-y-[10%]'
-                  : 'translate-y-[5%]'
+                  ? 'translate-y-[35%] md:translate-y-[10%]'
+                  : 'translate-y-[35%] md:translate-y-[5%]'
               }`}
             >
               {postContent.title &&
@@ -139,9 +139,9 @@ export default function SingleMethodology() {
                   )
                 : null}
             </span>
-            <div className="z-[2] flex w-full relative grow items-center justify-end">
-              <h1 className="text-[4vw] flex flex-col gap-3 font-modelicabold text-left leading-[6vw] absolute bottom-10 left-0">
-                <span className="text-[10vw]">
+            <div className="z-[2] flex w-full relative grow items-start justify-start md:items-center md:justify-end">
+              <h1 className="text-[6vw] md:text-[4vw] flex flex-col gap-3 font-modelicabold text-left leading-[15vw] md:leading-[6vw] absolute bottom-0 md:bottom-10 left-0">
+                <span className="text-[30vw] md:text-[10vw]">
                   {postContent.title &&
                     postContent.title.rendered.substring(0, 2)}
                 </span>
@@ -171,7 +171,7 @@ export default function SingleMethodology() {
               </span>
             ) : (
               <Link
-                className={`absolute right-10 bottom-10 z-[2] font-modelicabold text-[21px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black hover:bg-blue-one hover:text-black`}
+                className={`absolute right-0 md:right-10 bottom-10 z-[2] font-modelicabold text-[21px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black hover:bg-blue-one hover:text-black`}
                 to="/contact"
               >
                 <small className="text-[13px] font-modelicamed">

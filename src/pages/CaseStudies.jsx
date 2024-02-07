@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import btn3Image from '../assets/images/btn3.webp';
 import bgCase from '../assets/images/bg-cases.svg';
 import SingleCase from '../components/SingleCase';
+import { PageMainContent } from '../components/PageMainContent';
 
 export default function CaseStudies() {
   const [pageContent, setPageContent] = useState({});
@@ -34,22 +35,14 @@ export default function CaseStudies() {
   return (
     <>
       <section
-        className={`flex flex-col justify-center items-start min-h-100v-h2 bg-orange-one p-[75px] overflow-hidden`}
+        className={`flex flex-col justify-center items-start min-h-100v-h2 bg-orange-one px-[20px] py-[35px] md:p-[75px] overflow-hidden`}
       >
         {!loading ? (
-          <>
-            <h1 className="text-[5vw] font-modelicabold text-left leading-[6vw] mb-5">
-              {pageContent.title.rendered}
-            </h1>
-            <div className={style.content}>
-              <div
-                className="text-content"
-                dangerouslySetInnerHTML={{
-                  __html: pageContent.content.rendered,
-                }}
-              ></div>
-            </div>
-          </>
+          <PageMainContent
+            title={pageContent.title.rendered}
+            content={pageContent.content.rendered}
+            style={style.content}
+          />
         ) : (
           <Loading loading={loading} />
         )}
@@ -59,7 +52,7 @@ export default function CaseStudies() {
         style={{
           backgroundImage: `url(${bgCase})`,
         }}
-        className={`${style.caseContent} flex flex-col justify-start min-h-100v-h  bg-contain bg-no-repeat items-center bg-blue-one px-[75px] py-[20px] pb-[200px] overflow-hidden`}
+        className={`${style.caseContent} flex flex-col justify-start min-h-100v-h md:bg-contain bg-no-repeat items-center bg-blue-one px-[20px] pt-[20vh] md:pt-[20px] md:px-[75px] py-[20px] pb-[200px] overflow-hidden`}
       >
         {!loading ? (
           <>
@@ -72,16 +65,12 @@ export default function CaseStudies() {
           <Loading loading={loading} />
         )}
         <span
-          className={`absolute right-20 bottom-20 flex w-[179px] h-[120px]`}
+          className={`relative md:absolute md:right-20 md:bottom-20 flex w-[179px] h-[120px] mt-[100px] md:mt-0`}
         >
           <Link
-            className={`w-[205px] h-[193px] z-[2] font-modelicamed text-[31px] leading-[30px] flex items-center justify-center`}
+            className={`w-[205px] h-[193px] z-[2] font-modelicamed text-[31px] leading-[30px] flex items-center justify-center bg-contain bg-no-repeat bg-center cursor-pointer`}
             style={{
               backgroundImage: `url(${btn3Image})`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              cursor: 'pointer',
             }}
             to="/contact"
           >

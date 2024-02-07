@@ -12,12 +12,12 @@ export default function SingleCase({ singlecase }) {
 
   return (
     <div
-      className={` ${style.caseItem} flex flex-col mt-8 w-1/3 items-center text-left`}
+      className={` ${style.caseItem} flex flex-col mt-8 w-full md:w-1/3 items-center text-left`}
     >
       <h3
         className={`${
           isPopUpOpen ? 'opacity-0 ' : 'opacity-100'
-        } font-modelicalight text-[2vw] transition-opacity ease-in-out`}
+        } font-modelicalight text-[30px] md:text-[2vw] transition-opacity ease-in-out`}
       >
         {singlecase.title && singlecase.title.rendered}
       </h3>
@@ -32,8 +32,10 @@ export default function SingleCase({ singlecase }) {
       <div
         className={`${
           style.popUpSingleCase
-        } absolute -translate-y-[20px] py-10 px-10 rounded-xl transition-all ease-in-out ${
-          isPopUpOpen ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-0'
+        } fixed md:absolute md:-translate-y-[20px] h-100v-h bottom-0 md:bottom-auto md:h-auto py-10 px-10 rounded-xl transition-all duration-500 ease-in-out ${
+          isPopUpOpen
+            ? 'opacity-100 z-10 -translate-y-[0px] md:-translate-y-[20px] md:scale-100'
+            : 'opacity-0 z-0 translate-y-[100vh] md:-translate-y-[-20px] md:scale-0'
         }`}
       >
         <button

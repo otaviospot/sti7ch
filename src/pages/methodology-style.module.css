@@ -14,3 +14,14 @@
 .contentMet strong {
   font-family: 'modelica-bold', sans-serif;
 }
+
+@media screen and (max-width: 768px) {
+  .contentMet {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .contentMet p {
+    font-size: 6vw;
+    line-height: 7vw;
+  }
+}
