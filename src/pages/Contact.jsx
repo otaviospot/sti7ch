@@ -5,9 +5,10 @@ import style from './home-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
 import btn4Img from '../assets/images/btn4.webp';
-import logo from '../assets/images/logo-bot.svg';
+import logo from '../assets/images/logo-bot-2.svg';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { HiOutlineMailOpen } from 'react-icons/hi';
+import { PageMainContent } from '../components/PageMainContent';
 
 export default function Contact() {
   const [pageContent, setPageContent] = useState({});
@@ -41,31 +42,25 @@ export default function Contact() {
 
   return (
     <>
-      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-pink-one p-[75px] overflow-hidden">
+      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-pink-one px-[20px] py-[35px] md:p-[75px] overflow-hidden">
         {!loading ? (
           <>
-            <h1 className="text-[4.5vw] font-modelicabold text-left">
-              {pageContent.title.rendered}
-            </h1>
-            <div className={style.content}>
-              <div
-                className="text-content"
-                dangerouslySetInnerHTML={{
-                  __html: pageContent.content.rendered,
-                }}
-              ></div>
-            </div>
+            <PageMainContent
+              title={pageContent.title.rendered}
+              content={pageContent.content.rendered}
+              style={style.content}
+            />
           </>
         ) : (
           <Loading loading={loading} />
         )}
       </section>
-      <section className="flex justify-start gap-[80px] bg-white p-[75px] overflow-hidden">
-        <div className="flex flex-col flex-0-auto pt-[40px] pb-[40px] gap-[40px] items-start">
+      <section className="flex flex-col md:flex-row justify-start gap-[80px] bg-white px-[20px] py-[35px] md:p-[75px] overflow-hidden">
+        <div className="flex order-2 md:order-1 w-full md:w-auto flex-col flex-0-auto pt-[40px] pb-[40px] gap-[40px] items-start">
           <Link className="" to="/">
-            <img alt="Sti7ch logo" className="w-[30vw]" src={logo} />
+            <img alt="Sti7ch logo" className="w-full md:w-[30vw]" src={logo} />
           </Link>
-          <nav className="flex gap-5 font-modelicamed text-[22px] items-start justify-start">
+          <nav className="flex w-full md:w-auto gap-5 font-modelicamed text-[22px] items-start justify-center md:justify-start">
             <a
               className="hover:text-pink-one"
               rel="noreferrer"
@@ -92,12 +87,12 @@ export default function Contact() {
             </a>
           </nav>
         </div>
-        <div className="w-full">
+        <div className="w-full order-1 md:order-2">
           <form
             className="flex flex-col gap-9 w-full font-modelicamed"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[100px] flex flex-col">
+            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[100px] flex flex-col">
               <label className="font-modelicamed text-[20px]">Name</label>
               <input
                 className="grow"
@@ -107,7 +102,7 @@ export default function Contact() {
                 <span className="text-pink-one">This field is required</span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[100px] flex flex-col">
+            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[100px] flex flex-col">
               <label className="font-modelicamed text-[20px]">Email</label>
               <input
                 className="grow"
@@ -120,7 +115,7 @@ export default function Contact() {
                 <span className="text-pink-one">This field is required</span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[120px] flex flex-col">
+            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[120px] flex flex-col">
               <label className="font-modelicamed text-[20px]">
                 Are you looking for
               </label>
@@ -149,7 +144,7 @@ export default function Contact() {
                 <span className="text-pink-one">This field is required</span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border rounded-3xl text-left h-[120px]  flex flex-col">
+            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[250px] md:h-[150px]  flex flex-col">
               <label className="font-modelicamed text-[20px]">
                 What challenge can STI7CH help you unravel?
               </label>
@@ -162,7 +157,7 @@ export default function Contact() {
               )}
             </div>
             <input
-              className="self-end bg-blue-one font-modelicamed text-black text-[25px] py-[10px] px-[30px] rounded-2xl cursor-pointer hover:bg-orange-one"
+              className="self-end w-full md:w-auto bg-blue-one font-modelicamed text-black text-[25px] py-[10px] px-[30px] rounded-2xl cursor-pointer hover:bg-orange-one"
               type="submit"
               value="Schedule Consultation"
             />

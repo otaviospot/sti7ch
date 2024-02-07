@@ -30,3 +30,14 @@
   right: -110%;
   top: -25%;
 }
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .content p {
+    font-size: 6vw;
+    line-height: 7vw;
+  }
+}

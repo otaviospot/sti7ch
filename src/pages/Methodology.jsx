@@ -6,6 +6,7 @@ import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
 import btn2Image from '../assets/images/btn2.webp';
 import MethodologyItem from '../components/MethodologyItem';
+import { PageMainContent } from '../components/PageMainContent';
 
 export default function Methodology() {
   const [pageContent, setPageContent] = useState({});
@@ -53,27 +54,21 @@ export default function Methodology() {
 
   return (
     <>
-      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-pink-one p-[75px] overflow-hidden">
+      <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-pink-one px-[20px] py-[35px] md:p-[75px] overflow-hidden">
         {!loading ? (
           <>
-            <h1 className="text-[5vw] font-modelicabold text-left leading-[6vw] mb-5">
-              {pageContent.title.rendered}
-            </h1>
-            <div className={style.contentMet}>
-              <div
-                className="text-content"
-                dangerouslySetInnerHTML={{
-                  __html: pageContent.content.rendered,
-                }}
-              ></div>
-            </div>
+            <PageMainContent
+              title={pageContent.title.rendered}
+              content={pageContent.content.rendered}
+              style={style.contentMet}
+            />
           </>
         ) : (
           <Loading loading={loading} />
         )}
       </section>
-      <section className="bg-bg-one w-full p-[75px] pb-[25px] items-end flex flex-col relative">
-        <ul className="flex justify-between w-full">
+      <section className="bg-bg-one w-full px-[20px] py-[35px] md:p-[75px] md:pb-[25px] items-end flex flex-col relative">
+        <ul className="flex justify-between w-full flex-col gap-10 md:gap-0 md:flex-row">
           {!loading ? (
             <>
               {postTypeContent &&
@@ -87,7 +82,7 @@ export default function Methodology() {
         </ul>
 
         <Link
-          className={`z-[2] text-[20px] border-[1.5px] mt-[40px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
+          className={`z-[2] text-[20px] border-[1.5px] mt-[40px] w-full md:w-auto border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
           style={{
             cursor: 'pointer',
           }}

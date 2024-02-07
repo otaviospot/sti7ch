@@ -39,3 +39,13 @@
 .popUpSingleCase {
   background: rgba(255, 255, 255, 0.5);
 }
+
+@media screen and (max-width: 768px) {
+  .popUpSingleCase {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  .caseItem:nth-child(3) .popUpSingleCase {
+    transform: translateY(0%);
+  }
+}
