@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { apiGetPage, apiGetPostType } from '../services/apiService';
+import { MyContext } from '../MyContext';
 import style from './about-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
@@ -15,13 +16,14 @@ export default function About() {
   const [loading, setLoading] = useState(true);
   const [featuredImageUrl, setFeaturedImageUrl] = useState('');
   const [isShowingAboutContent, setIsShowingAboutContent] = useState(false);
+  const { language } = useContext(MyContext);
 
   useEffect(() => {
     async function getPageContent() {
       try {
         window.scrollTo(0, 0);
-        const backEndContent = await apiGetPage(17);
-        const backendTestimonials = await apiGetPostType('testimony');
+        const backEndContent = await apiGetPage(17, language);
+        const backendTestimonials = await apiGetPostType('testimony', language);
         setPageContent(backEndContent);
         setTestimonialsContent(backendTestimonials);
 
@@ -42,7 +44,7 @@ export default function About() {
     }
 
     getPageContent();
-  }, []);
+  }, [language]);
 
   function extractTextFromHtml(html) {
     const span = document.createElement('span');
@@ -80,7 +82,8 @@ export default function About() {
         {!loading ? (
           <>
             <h1 className="font-modelicalight text-[10vw] leading-[10vw] md:text-[5vw] md:leading-[5.5vw] text-left">
-              <strong className="font-modelicabold">Sti7ch</strong> is
+              <strong className="font-modelicabold">Sti7ch</strong>{' '}
+              {language === 'en' ? 'is' : 'é'}
               <br />
               <span className="text-[10vw] md:text-[5.5vw]">
                 {pageContent.acf.title_about}
@@ -93,8 +96,8 @@ export default function About() {
                 src={featuredImageUrl}
               />
               <div className="flex flex-col flex-grow w-full md:w-3/4 items-center">
-                <div className="text-[30px] w-full font-modelicalight leading-[45px] text-left px-0 md:px-[40px] mt-[12%]">
-                  {getFirstWords(pageContent.acf.content_about, 36)}
+                <div className="text-[18px] md:text-[30px] w-full font-modelicalight leading-[28px] md:leading-[45px] text-left px-0 md:px-[40px] mt-[12%]">
+                  {getFirstWords(pageContent.acf.content_about, 37)}
                 </div>
                 <div
                   className={`relative overflow-hidden w-full flex justify-center ${
@@ -110,7 +113,7 @@ export default function About() {
                         dangerouslySetInnerHTML={{
                           __html: pageContent.acf.content_about
                             .split(' ')
-                            .slice(35)
+                            .slice(37)
                             .join(' '),
                         }}
                       ></div>
@@ -145,12 +148,12 @@ export default function About() {
                   className={`${style.testimony} flex flex-col mt-8 w-full md:w-2/5 items-left justify-between text-left`}
                 >
                   <div
-                    className="w-full font-modelicalight text-[6vw] md:text-[2vw]"
+                    className="w-full font-modelicalight text-[18px] md:text-[2vw]"
                     dangerouslySetInnerHTML={{
                       __html: testimony.content.rendered,
                     }}
                   ></div>
-                  <span className="font-modelicabold text-[5.5vw] md:text-[1.5vw]">
+                  <span className="font-modelicabold text-[20px] md:text-[1.5vw]">
                     {testimony.title.rendered}
                   </span>
                 </div>
@@ -169,7 +172,7 @@ export default function About() {
             }}
             to="/methodology"
           >
-            See How We Work Together
+            {language === 'en' ? 'See How We Work' : 'Veja como trabalhamos'}
           </Link>
         </span>
       </section>

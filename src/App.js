@@ -15,6 +15,7 @@ import Contact from './pages/Contact';
 function App() {
   const [methodologyContent, setMethodologyContent] = useState([]);
   const [caseContent, setCaseContent] = useState([]);
+  const [language, setLanguage] = useState('en');
 
   const fetchFeaturedImage = async (mediaId) => {
     try {
@@ -28,6 +29,10 @@ function App() {
     }
   };
 
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+  };
+
   return (
     <div className="App pt-[80px]">
       <MyContext.Provider
@@ -37,6 +42,9 @@ function App() {
           fetchFeaturedImage,
           caseContent,
           setCaseContent,
+          language,
+          setLanguage,
+          handleLanguageChange,
         }}
       >
         <Router basename="/dev">

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { MyContext } from '../MyContext';
 import { apiGetPage } from '../services/apiService';
 import style from './home-style.module.css';
 import Loading from '../components/Loading';
@@ -13,6 +14,7 @@ import { PageMainContent } from '../components/PageMainContent';
 export default function Contact() {
   const [pageContent, setPageContent] = useState({});
   const [loading, setLoading] = useState(true);
+  const { language } = useContext(MyContext);
 
   const {
     register,
@@ -29,7 +31,7 @@ export default function Contact() {
     async function getPageContent() {
       try {
         window.scrollTo(0, 0);
-        const backEndContent = await apiGetPage(70);
+        const backEndContent = await apiGetPage(70, language);
         setPageContent(backEndContent);
         setLoading(false);
       } catch (error) {
@@ -92,18 +94,42 @@ export default function Contact() {
             className="flex flex-col gap-9 w-full font-modelicamed"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[100px] flex flex-col">
-              <label className="font-modelicamed text-[20px]">Name</label>
+            <div className="py-[10px] px-[30px] border border-gray-300 rounded-3xl text-left h-[70px] flex flex-col">
+              <label className="font-modelicamed text-[16px] md:text-[20px]">
+                {language === 'en' ? 'Name' : 'Nome'}
+              </label>
               <input
                 className="grow"
                 {...register('name', { required: true })}
               />
               {errors.name && (
-                <span className="text-pink-one">This field is required</span>
+                <span className="text-pink-one">
+                  {language === 'en'
+                    ? `This field is required`
+                    : 'Campo obrigatório'}
+                </span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[100px] flex flex-col">
-              <label className="font-modelicamed text-[20px]">Email</label>
+            <div className="py-[10px] px-[30px] border border-gray-300 rounded-3xl text-left h-[70px] flex flex-col">
+              <label className="font-modelicamed text-[16px] md:text-[20px]">
+                {language === 'en' ? 'Phone' : 'Telefone'}
+              </label>
+              <input
+                className="grow"
+                {...register('phone', { required: true })}
+              />
+              {errors.name && (
+                <span className="text-pink-one">
+                  {language === 'en'
+                    ? `This field is required`
+                    : 'Campo obrigatório'}
+                </span>
+              )}
+            </div>
+            <div className="py-[10px] px-[30px] border border-gray-300 rounded-3xl text-left h-[70px] flex flex-col">
+              <label className="font-modelicamed text-[16px] md:text-[20px]">
+                {language === 'en' ? 'Email' : 'E-mail'}
+              </label>
               <input
                 className="grow"
                 {...register('email', {
@@ -112,22 +138,28 @@ export default function Contact() {
                 })}
               />
               {errors.email && (
-                <span className="text-pink-one">This field is required</span>
+                <span className="text-pink-one">
+                  {language === 'en'
+                    ? `This field is required`
+                    : 'Campo obrigatório'}
+                </span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[120px] flex flex-col">
-              <label className="font-modelicamed text-[20px]">
-                Are you looking for
+            <div className="py-[10px] px-[30px] border border-gray-300 rounded-3xl text-left h-[120px] flex flex-col">
+              <label className="font-modelicamed text-[16px] md:text-[20px]">
+                {language === 'en'
+                  ? 'Are you looking for business or individual consultation?'
+                  : 'Está procurando por consultoria profissional ou para o seu negócio?'}
               </label>
               <div className="flex gap-5 grow items-center">
                 <label>
                   <input
                     type="radio"
-                    value="Business Consultation"
+                    value="Company Consultation"
                     className="mr-2"
                     {...register('consultationType', { required: true })}
                   />
-                  Business Consultation
+                  {language === 'en' ? 'company' : 'empresarial'}
                 </label>
 
                 <label>
@@ -137,29 +169,43 @@ export default function Contact() {
                     className="mr-2"
                     {...register('consultationType', { required: true })}
                   />
-                  Individual Consultation
+                  {language === 'en' ? 'individual' : 'profissional'}
                 </label>
               </div>
               {errors.consultationType && (
-                <span className="text-pink-one">This field is required</span>
+                <span className="text-pink-one">
+                  {language === 'en'
+                    ? `This field is required`
+                    : 'Campo obrigatórios'}
+                </span>
               )}
             </div>
-            <div className="py-[10px] px-[30px] border-[2px] rounded-3xl text-left h-[250px] md:h-[150px]  flex flex-col">
-              <label className="font-modelicamed text-[20px]">
-                What challenge can STI7CH help you unravel?
+            <div className="py-[10px] px-[30px] border border-gray-300 rounded-3xl text-left h-[220px] md:h-[150px]  flex flex-col">
+              <label className="font-modelicamed text-[16px] md:text-[20px]">
+                {language === 'en'
+                  ? 'What challenge can sti7ch help you unravel?'
+                  : 'Que desafio sti7ch pode ajudá-lo a solucionar?'}
               </label>
               <textarea
                 className="grow"
                 {...register('message', { required: true })}
               />
               {errors.message && (
-                <span className="text-pink-one">This field is required</span>
+                <span className="text-pink-one">
+                  {language === 'en'
+                    ? `This field is required`
+                    : 'Campo obrigatório'}
+                </span>
               )}
             </div>
             <input
               className="self-end w-full md:w-auto bg-blue-one font-modelicamed text-black text-[25px] py-[10px] px-[30px] rounded-2xl cursor-pointer hover:bg-orange-one"
               type="submit"
-              value="Schedule Consultation"
+              value={
+                language === 'en'
+                  ? 'Schedule Consultation'
+                  : 'Agendar consultoria'
+              }
             />
           </form>
         </div>

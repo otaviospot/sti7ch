@@ -17,6 +17,16 @@
 .btn1 {
   position: absolute;
   bottom: 20px;
+  transform: scale(0.9);
+}
+
+.btn1 a {
+  transform: scale(0.9);
+  transition: all 0.5s ease;
+}
+
+.btn1:hover a {
+  transform: scale(1);
 }
 
 .btn1:before {
@@ -37,7 +47,13 @@
     margin-top: 30px;
   }
   .content p {
-    font-size: 6vw;
-    line-height: 7vw;
+    font-size: 19px;
+    line-height: 25px;
+  }
+
+  .btn1 {
+    position: absolute;
+    bottom: 5px;
+    transform: scale(0.8) !important;
   }
 }

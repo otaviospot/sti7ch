@@ -2,13 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import style from './methodologyitem-style.module.css';
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as SvgComponent1 } from '../assets/images/svgs/met-1-animated.svg';
-import { ReactComponent as SvgComponent2 } from '../assets/images/svgs/met-2-animated.svg';
-import { ReactComponent as SvgComponent3 } from '../assets/images/svgs/met-3-animated.svg';
-import { ReactComponent as SvgComponent4 } from '../assets/images/svgs/met-4-animated.svg';
-import { ReactComponent as SvgComponent5 } from '../assets/images/svgs/met-5-animated.svg';
-import { ReactComponent as SvgComponent6 } from '../assets/images/svgs/met-6-animated.svg';
-import { ReactComponent as SvgComponent7 } from '../assets/images/svgs/met-7-animated.svg';
+import { ReactComponent as SvgComponent1 } from '../assets/images/svgs/met-1-animated-2.svg';
+import { ReactComponent as SvgComponent2 } from '../assets/images/svgs/met-2-animated-2.svg';
+import { ReactComponent as SvgComponent3 } from '../assets/images/svgs/met-3-animated-2.svg';
+import { ReactComponent as SvgComponent4 } from '../assets/images/svgs/met-4-animated-2.svg';
+import { ReactComponent as SvgComponent5 } from '../assets/images/svgs/met-5-animated-2.svg';
+import { ReactComponent as SvgComponent6 } from '../assets/images/svgs/met-6-animated-2.svg';
+import { ReactComponent as SvgComponent7 } from '../assets/images/svgs/met-7-animated-2.svg';
 
 const svgMapping = {
   1: SvgComponent1,
@@ -52,7 +52,7 @@ export default function MethodologyItem({ item }) {
   return (
     <li
       key={item.id}
-      className={`${style.metListItem} w-full md:w-[14%] grow-0 group flex-0-auto relative flex flex-col justify-center`}
+      className={`${style.metListItem} w-full md:w-[14%] grow-0 group flex-0-auto relative flex flex-col justify-center animate__animated animate__fadeIn`}
     >
       <Link
         to={item.slug}
@@ -62,21 +62,16 @@ export default function MethodologyItem({ item }) {
           {item.imageUrl && (
             <>
               <span
-                className={`${style.svgContainer} absolute scale-0 group-hover:scale-125 transition-all ease duration-500 mb-3 w-full justify-center flex max-h-[150px]`}
+                className={`${style.svgContainer} absolute scale-100 group-hover:scale-125 transition-all ease duration-500 mb-3 w-full justify-center flex max-h-[150px]`}
               >
-                {item.title &&
-                svgMapping[Number(item.title.rendered.substr(0, 1))]
-                  ? React.createElement(
-                      svgMapping[Number(item.title.rendered.substr(0, 1))]
-                    )
-                  : null}
+                {item.imageUrl && (
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title.rendered}
+                    className="w-full h-full"
+                  />
+                )}
               </span>
-
-              <img
-                className={`mb-3 w-full justify-center flex max-h-[150px] scale-90 group-hover:scale-50 transition-all linear delay-100 duration-200`}
-                alt={item.title && item.title.rendered}
-                src={item.imageUrl}
-              />
             </>
           )}
         </div>

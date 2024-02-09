@@ -48,7 +48,7 @@
 .testimonials .testimony:first-child:before {
   width: 170%;
   height: 170%;
-  background-image: url(../assets/images/bg-testimony1.webp);
+  background-image: url(../assets/images/svgs/bg-testimony1.svg);
   top: -20%;
   left: -20%;
 }
@@ -61,7 +61,7 @@
 .testimonials .testimony:nth-child(2):before {
   width: 220%;
   height: 220%;
-  background-image: url(../assets/images/bg-testimony2.webp);
+  background-image: url(../assets/images/svgs/bg-testimony2.svg);
   top: -60%;
   left: -10%;
 }
@@ -74,7 +74,7 @@
 .testimonials .testimony:nth-child(3):before {
   width: 170%;
   height: 170%;
-  background-image: url(../assets/images/bg-testimony3.webp);
+  background-image: url(../assets/images/svgs/bg-testimony3.svg);
   top: -20%;
   left: 5%;
 }
@@ -87,7 +87,7 @@
 .testimonials .testimony:nth-child(4):before {
   width: 170%;
   height: 170%;
-  background-image: url(../assets/images/bg-testimony4.webp);
+  background-image: url(../assets/images/svgs/bg-testimony4.svg);
   top: -20%;
   left: -20%;
 }
@@ -100,8 +100,8 @@
   }
   .content p,
   .contentMet p {
-    font-size: 6vw;
-    line-height: 7vw;
+    font-size: 19px;
+    line-height: 25px;
   }
 
   .testimonials .testimony:first-child {
@@ -137,5 +137,14 @@
     height: 150%;
     top: -0%;
     left: -20%;
+  }
+
+  .fullText {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .fullText p {
+    margin-bottom: 20px;
   }
 }

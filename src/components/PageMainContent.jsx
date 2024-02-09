@@ -3,12 +3,12 @@ import React from 'react';
 export const PageMainContent = ({ title, content, style }) => {
   return (
     <>
-      <h1 className="text-[15vw] leading-[15vw] md:leading-[7vw] md:text-[5vw] font-modelicabold text-left">
+      <h1 className="text-[40px] leading-[42px] md:leading-[7vw] md:text-[5vw] font-modelicabold text-left animate__animated animate__fadeInLeft">
         {title}
       </h1>
       <div className={style}>
         <div
-          className="text-content"
+          className="text-content animate__animated animate__fadeInLeft animate__delay-1s"
           dangerouslySetInnerHTML={{
             __html: content,
           }}
