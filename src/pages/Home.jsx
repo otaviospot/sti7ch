@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { apiGetPage } from "../services/apiService";
+import { MyContext } from "../MyContext";
 import style from "./home-style.module.css";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
@@ -9,11 +10,12 @@ import { PageMainContent } from "../components/PageMainContent";
 export default function Home() {
   const [pageContent, setPageContent] = useState({});
   const [loading, setLoading] = useState(true);
+  const { language } = useContext(MyContext);
 
   useEffect(() => {
     async function getPageContent() {
       try {
-        const backEndContent = await apiGetPage(14);
+        const backEndContent = await apiGetPage(14, language);
         setPageContent(backEndContent);
         setLoading(false);
       } catch (error) {
@@ -22,7 +24,7 @@ export default function Home() {
     }
 
     getPageContent();
-  }, []);
+  }, [language]);
 
   return (
     <>
@@ -35,16 +37,26 @@ export default function Home() {
               style={style.content}
             />
             <span
-              className={`${style.btn1} absolute right-[20px] flex w-[152px] h-[132px] scale-[.9] transition-all ease-linear duration-500 hover:scale-100`}
+              className={`${style.btn1} absolute right-[20px] flex w-[152px] h-[132px] transition-all ease-linear duration-500 animate__animated animate__fadeInRight animate__delay-3s`}
             >
               <Link
                 className={`btn-1 w-[152px] h-[132px] z-[2] font-modelicamed text-[28px] leading-[30px] flex items-center justify-center`}
                 style={{ backgroundImage: `url(${btn1Image})` }}
                 to="/about"
               >
-                Ready to
-                <br />
-                Grow?
+                {language === "en" ? (
+                  <>
+                    Ready to
+                    <br />
+                    Grow?
+                  </>
+                ) : (
+                  <>
+                    Pronto para
+                    <br />
+                    crescer?
+                  </>
+                )}
               </Link>
             </span>
           </>

@@ -37,7 +37,7 @@
 }
 
 .popUpSingleCase {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 @media screen and (max-width: 768px) {
@@ -47,5 +47,21 @@
 
   .caseItem:nth-child(3) .popUpSingleCase {
     transform: translateY(0%);
+  }
+
+  .caseItem:nth-child(2) {
+    margin-top: 100px;
+  }
+
+  .caseItem:nth-child(3) {
+    margin-top: 100px;
+  }
+
+  .caseItem:last-child {
+    margin-top: 100px;
+  }
+
+  .contentPopUp p {
+    font-size: 17px;
   }
 }

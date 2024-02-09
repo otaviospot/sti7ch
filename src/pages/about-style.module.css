@@ -13,17 +13,17 @@
   font-size: 3vw;
   line-height: 3.5vw;
   text-align: left;
-  font-family: 'modelica-light', sans-serif;
+  font-family: "modelica-light", sans-serif;
   margin-bottom: 30px;
 }
 
 .content strong,
 .contentMet strong {
-  font-family: 'modelica-bold', sans-serif;
+  font-family: "modelica-bold", sans-serif;
 }
 
 .fullText {
-  font-family: 'modelica-light', sans-serif;
+  font-family: "modelica-light", sans-serif;
   font-size: 30px;
   line-height: 45px;
   text-align: left;
@@ -33,13 +33,17 @@
   margin-bottom: 40px;
 }
 
+.fullText p strong {
+  font-family: "modelica-bold", sans-serif;
+}
+
 .testimonials .testimony:first-child {
   position: relative;
   transform: translateX(-30%);
 }
 
 .testimonials .testimony:before {
-  content: '';
+  content: "";
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
@@ -48,7 +52,7 @@
 .testimonials .testimony:first-child:before {
   width: 170%;
   height: 170%;
-  background-image: url(../assets/images/bg-testimony1.webp);
+  background-image: url(../assets/images/svgs/bg-testimony1.svg);
   top: -20%;
   left: -20%;
 }
@@ -61,7 +65,7 @@
 .testimonials .testimony:nth-child(2):before {
   width: 220%;
   height: 220%;
-  background-image: url(../assets/images/bg-testimony2.webp);
+  background-image: url(../assets/images/svgs/bg-testimony2.svg);
   top: -60%;
   left: -10%;
 }
@@ -74,7 +78,7 @@
 .testimonials .testimony:nth-child(3):before {
   width: 170%;
   height: 170%;
-  background-image: url(../assets/images/bg-testimony3.webp);
+  background-image: url(../assets/images/svgs/bg-testimony3.svg);
   top: -20%;
   left: 5%;
 }
@@ -87,7 +91,7 @@
 .testimonials .testimony:nth-child(4):before {
   width: 170%;
   height: 170%;
-  background-image: url(../assets/images/bg-testimony4.webp);
+  background-image: url(../assets/images/svgs/bg-testimony4.svg);
   top: -20%;
   left: -20%;
 }
@@ -100,8 +104,8 @@
   }
   .content p,
   .contentMet p {
-    font-size: 6vw;
-    line-height: 7vw;
+    font-size: 19px;
+    line-height: 25px;
   }
 
   .testimonials .testimony:first-child {
@@ -137,5 +141,14 @@
     height: 150%;
     top: -0%;
     left: -20%;
+  }
+
+  .fullText {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .fullText p {
+    margin-bottom: 20px;
   }
 }

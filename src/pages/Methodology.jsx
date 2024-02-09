@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { apiGetPage, apiGetPostType } from '../services/apiService';
 import { MyContext } from '../MyContext';
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 import style from './methodology-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
@@ -12,13 +13,14 @@ export default function Methodology() {
   const [pageContent, setPageContent] = useState({});
   const [postTypeContent, setPostTypeContent] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { setMethodologyContent, fetchFeaturedImage } = useContext(MyContext);
+  const { setMethodologyContent, fetchFeaturedImage, language } =
+    useContext(MyContext);
 
   useEffect(() => {
     async function getPageContent() {
       try {
         window.scrollTo(0, 0);
-        const backEndContent = await apiGetPage(37);
+        const backEndContent = await apiGetPage(37, language);
         setPageContent(backEndContent);
 
         setLoading(false);
@@ -29,7 +31,7 @@ export default function Methodology() {
 
     async function getPostTypeContent() {
       try {
-        const backEndPTContent = await apiGetPostType('methodology');
+        const backEndPTContent = await apiGetPostType('methodology', language);
         const postsWithImages = await Promise.all(
           backEndPTContent.map(async (post) => {
             const imageUrl = post.featured_media
@@ -50,7 +52,7 @@ export default function Methodology() {
     getPostTypeContent();
 
     getPageContent();
-  }, []);
+  }, [language]);
 
   return (
     <>
@@ -74,7 +76,7 @@ export default function Methodology() {
               {postTypeContent &&
                 [...postTypeContent]
                   .reverse()
-                  .map((item) => <MethodologyItem item={item} />)}
+                  .map((item, index) => <MethodologyItem item={item} />)}
             </>
           ) : (
             <Loading loading={loading} />
@@ -88,7 +90,7 @@ export default function Methodology() {
           }}
           to="/case-studies"
         >
-          {`See Case Studies >`}
+          {language === 'en' ? 'See Case Studies >' : 'Veja estudos de caso'}
         </Link>
       </section>
     </>

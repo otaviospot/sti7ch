@@ -1,4 +1,4 @@
-.metListItem:nth-child(3) svg {
+.metListItem:nth-child(3) img {
   max-height: 140px;
 }
 
@@ -7,6 +7,6 @@
   max-height: 125px;
 }
 
-.svgContainer svg {
+.svgContainer img {
   max-height: 150px;
 }
