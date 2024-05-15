@@ -1,20 +1,21 @@
-import { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { apiGetPage, apiGetPostType } from "../services/apiService";
-import { MyContext } from "../MyContext";
-import style from "./about-style.module.css";
-import Loading from "../components/Loading";
-import { Link } from "react-router-dom";
-import btn2Image from "../assets/images/btn2.webp";
-import arrowDown from "../assets/images/arrowdown.svg";
-import { MdClose } from "react-icons/md";
-import { PageMainContent } from "../components/PageMainContent";
+import { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { apiGetPage, apiGetPostType } from '../services/apiService';
+import { MyContext } from '../MyContext';
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import style from './about-style.module.css';
+import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
+import arrowDown from '../assets/images/arrowdown.svg';
+import { MdClose } from 'react-icons/md';
+import { PageMainContent } from '../components/PageMainContent';
 
 export default function About() {
   const [pageContent, setPageContent] = useState({});
+  const [bioContent, setbioContent] = useState({});
   const [testimonialsContent, setTestimonialsContent] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
+  const [featuredImageUrl, setFeaturedImageUrl] = useState('');
   const [isShowingAboutContent, setIsShowingAboutContent] = useState(false);
   const { language } = useContext(MyContext);
 
@@ -23,8 +24,10 @@ export default function About() {
       try {
         window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(17, language);
-        const backendTestimonials = await apiGetPostType("testimony", language);
+        const backEndBioContent = await apiGetPage(184, language);
+        const backendTestimonials = await apiGetPostType('testimony', language);
         setPageContent(backEndContent);
+        setbioContent(backEndBioContent);
         setTestimonialsContent(backendTestimonials);
 
         // Fetching the featured image if it exists
@@ -46,16 +49,39 @@ export default function About() {
     getPageContent();
   }, [language]);
 
-  function extractTextFromHtml(html) {
-    const span = document.createElement("span");
-    span.innerHTML = html;
-    return span.textContent || span.innerText;
+  useEffect(() => {
+    // Adiciona ou remove a classe no body dependendo do estado do popup
+    if (isShowingAboutContent) {
+      document.body.classList.add('popup-open');
+    } else {
+      document.body.classList.remove('popup-open');
+    }
+  }, [isShowingAboutContent]);
+
+  function getFirstNParagraphs(html, n) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const paragraphs = doc.querySelectorAll('p');
+    let resultHtml = '';
+
+    for (let i = 0; i < Math.min(n, paragraphs.length); i++) {
+      resultHtml += paragraphs[i].outerHTML; // outerHTML mantém a tag <p> original
+    }
+
+    return resultHtml;
   }
 
-  function getFirstWords(html, qty) {
-    const text = extractTextFromHtml(html);
-    const words = text.split(/\s+/).slice(0, qty);
-    return words.join(" ");
+  function getParagraphsExceptFirstTwo(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const paragraphs = doc.querySelectorAll('p');
+    let resultHtml = '';
+
+    for (let i = 2; i < paragraphs.length; i++) {
+      resultHtml += paragraphs[i].outerHTML; // outerHTML mantém a tag <p> original
+    }
+
+    return resultHtml;
   }
 
   function handleClick(event) {
@@ -65,12 +91,41 @@ export default function About() {
 
   return (
     <>
+      <div
+        className={`${
+          style.maincontent
+        } fixed right-0 bottom-0 z-10 overflow-hidden w-full h-100v80-h pt-[60px] px-[20px] md:pt-[75px] md:px-[75px] flex justify-center overflow-y-auto ${
+          isShowingAboutContent ? 'translate-x-[0vw]' : 'translate-x-[101vw]'
+        } transition-all duration-500 ease-in-out z-[5] overflow-hidden`}
+      >
+        <button
+          className="absolute right-[20px] top-[20px] text-[30px]"
+          onClick={handleClick}
+        >
+          <MdClose />
+        </button>
+
+        {!loading ? (
+          <>
+            <div
+              className={`${style.fullText} text-content w-full px-0 md:pr-[30px] overflow-y-auto`}
+              dangerouslySetInnerHTML={{
+                __html: getParagraphsExceptFirstTwo(
+                  bioContent.content && bioContent.content.rendered
+                ),
+              }}
+            ></div>
+          </>
+        ) : (
+          <Loading loading={loading} />
+        )}
+      </div>
       <section className="flex flex-col justify-center items-start min-h-100v-h2 bg-orange-one px-[20px] py-[35px] md:p-[75px] overflow-hidden">
         {!loading ? (
           <>
             <PageMainContent
-              title={pageContent.title.rendered}
-              content={pageContent.content.rendered}
+              title={pageContent.title && pageContent.title.rendered}
+              content={pageContent.content && pageContent.content.rendered}
               style={style.content}
             />
           </>
@@ -81,51 +136,36 @@ export default function About() {
       <section className="flex flex-col justify-center items-start bg-bg-one px-[20px] py-[35px] md:p-[75px] overflow-hidden">
         {!loading ? (
           <>
-            <h1 className="font-modelicalight text-[10vw] leading-[10vw] md:text-[5vw] md:leading-[5.5vw] text-left">
-              <strong className="font-modelicabold">sti7ch</strong>{" "}
-              {language === "en" ? "is" : "é"}
+            <h1 className="font-modelicalight text-[10vw] leading-[10vw] md:text-[4vw] 2xl:text-[5vw] md:leading-[5.5vw] text-left">
+              <strong className="font-modelicabold">sti7ch</strong>{' '}
+              {language === 'en' ? 'is' : 'é'}
               <br />
-              <span className="text-[10vw] md:text-[5.5vw]">
-                {pageContent.acf.title_about}
+              <span className="text-[10vw] md:text-[4vw] 2xl:text-[5.5vw]">
+                {pageContent.acf.title_about && pageContent.acf.title_about}
               </span>
             </h1>
-            <div className="flex mt-8 items-start justify-between flex-col md:flex-row">
+            <div className="flex mt-8 items-center justify-between flex-col md:flex-row">
               <img
                 className="w-full md:w-1/4 h-auto"
                 alt="Danubia"
                 src={featuredImageUrl}
               />
               <div className="flex flex-col flex-grow w-full md:w-3/4 items-center">
-                <div className="text-[18px] md:text-[30px] w-full font-modelicalight leading-[28px] md:leading-[45px] text-left px-0 md:px-[40px] mt-[12%]">
-                  {getFirstWords(pageContent.acf.content_about, 37)}
-                </div>
-                <div
-                  className={`relative overflow-hidden w-full flex justify-center ${
-                    isShowingAboutContent
-                      ? "max-h-[auto] opacity-100"
-                      : "max-h-0 p-0 opacity-0"
-                  } transition-all duration-500 ease-in-out z-[5] overflow-hidden`}
-                >
-                  {!loading ? (
-                    <>
-                      <div
-                        className={`${style.fullText} text-content w-full px-0 md:px-[40px] overflow-y-auto`}
-                        dangerouslySetInnerHTML={{
-                          __html: pageContent.acf.content_about
-                            .split(" ")
-                            .slice(37)
-                            .join(" "),
-                        }}
-                      ></div>
-                    </>
-                  ) : (
-                    <Loading loading={loading} />
-                  )}
+                <div className="w-full px-0 md:px-[40px]">
+                  <div
+                    className={`${style.contentExerpt} w-full font-modelicalight text-[18px] md:text-[24px] 2xl:text-[30px] leading-[28px] md:leading-[35px] 2xl:leading-[45px]  text-left`}
+                    dangerouslySetInnerHTML={{
+                      __html: getFirstNParagraphs(
+                        bioContent.content && bioContent.content.rendered,
+                        2
+                      ),
+                    }}
+                  ></div>
                 </div>
                 <span
                   onClick={handleClick}
-                  className={`cursor-pointer w-[30px] mt-8 ${
-                    isShowingAboutContent ? "rotate-180" : ""
+                  className={`cursor-pointer md:w-[25px] 2xl:w-[30px] mt-4 ${
+                    isShowingAboutContent ? 'rotate-180' : ''
                   }`}
                 >
                   <img alt="See more" className="w-[30px]" src={arrowDown} />
@@ -138,25 +178,29 @@ export default function About() {
         )}
       </section>
       <section
-        className={`${style.testimonials} relative flex flex-col gap-40 md:gap-0 justify-center items-center bg-bg-one px-[20px] py-[35px] md:p-[75px] overflow-hidden`}
+        className={`${style.testimonials} relative flex flex-col gap-40 md:gap-0 justify-center items-center bg-bg-one px-[20px] py-[35px] md:p-[75px] md:pb-[200px] overflow-hidden`}
       >
         {!loading ? (
           <>
             {testimonialsContent &&
-              [...testimonialsContent].reverse().map((testimony) => (
-                <div
-                  className={`${style.testimony} flex flex-col mt-8 w-full md:w-2/5 items-left justify-between text-left`}
+              [...testimonialsContent].reverse().map((testimony, index) => (
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  duration={2}
+                  animateOnce={true}
+                  initiallyVisible={false}
+                  className={`${style.testimony} flex flex-col mt-8 w-full md:w-2/5 2xl:w-[30%] items-left justify-between text-left`}
                 >
                   <div
-                    className="w-full font-modelicalight text-[18px] md:text-[2vw]"
+                    className="w-full font-modelicalight text-[17px] md:text-[23px] 2xl:text-[28px]"
                     dangerouslySetInnerHTML={{
                       __html: testimony.content.rendered,
                     }}
                   ></div>
-                  <span className="font-modelicabold text-[20px] md:text-[1.5vw]">
+                  <span className="font-modelicabold text-[17px] mt-[5px] md:text-[20px]">
                     {testimony.title.rendered}
                   </span>
-                </div>
+                </AnimationOnScroll>
               ))}
           </>
         ) : (
@@ -166,13 +210,13 @@ export default function About() {
           className={`relative w-full md:w-auto md:absolute md:right-10 md:bottom-10 flex `}
         >
           <Link
-            className={`z-[2] w-full md:w-auto  text-[20px] border-[1.5px] border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
+            className={`z-[2] w-full md:w-auto  text-[21px] border-[1.5px] border-black hover:border-transparent border-solid py-[5px] px-[21px] font-modelicamed rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-pink-one`}
             style={{
-              cursor: "pointer",
+              cursor: 'pointer',
             }}
             to="/methodology"
           >
-            {language === "en" ? "See How We Work" : "Veja como trabalhamos"}
+            {language === 'en' ? 'See How We Work' : 'Veja como trabalhamos'}
           </Link>
         </span>
       </section>

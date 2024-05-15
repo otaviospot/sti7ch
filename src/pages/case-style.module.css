@@ -4,19 +4,58 @@
 }
 
 .content p {
-  font-size: 4vw;
-  line-height: 4.5vw;
+  font-size: 3vw;
+  line-height: 3.5vw;
   text-align: left;
-  font-family: "modelica-light", sans-serif;
+  font-family: 'modelica-light', sans-serif;
+}
+
+.content p:first-child {
+  margin-bottom: 20px;
 }
 
 .content strong {
-  font-family: "modelica-bold", sans-serif;
+  font-family: 'modelica-bold', sans-serif;
 }
 
 .caseContent {
   position: relative;
   background-position: 0% 28%;
+}
+
+.btn1 {
+  position: absolute;
+  bottom: 20px;
+}
+
+.btn1 a {
+  font-size: 21px;
+  transition: all 0.5s ease;
+  transform: scale(1);
+}
+
+.btn1 a:hover {
+  transform: scale(1.1);
+}
+
+.btn1:before {
+  content: '';
+  width: 1082px;
+  height: 233px;
+  background-image: url(../assets/images/line-btn1-2.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  display: block;
+  right: -110%;
+  bottom: -35%;
+}
+
+@media screen and (max-width: 1536px) {
+  .content p {
+    font-size: 2.5vw;
+    line-height: 3.5vw;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -30,6 +69,14 @@
   }
 
   .caseContent {
-    background-position: 0% 3%;
+    background-position: 50% 3%;
+    background-size: 150%;
+    padding-top: 300px;
+  }
+
+  .btn1 {
+    position: absolute;
+    bottom: 5px;
+    transform: scale(0.8) !important;
   }
 }

@@ -10,6 +10,7 @@ module.exports = {
         '80v': '80vh',
         '90v': '90vh',
         '100v-h': 'calc(100dvh - 100px)',
+        '100v80-h': 'calc(100dvh - 80px)',
       },
       minHeight: {
         '100v-h': 'calc(100dvh - 80px)',

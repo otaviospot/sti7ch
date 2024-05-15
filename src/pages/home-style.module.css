@@ -10,6 +10,10 @@
   font-family: 'modelica-light', sans-serif;
 }
 
+.content p:first-child {
+  margin-bottom: 20px;
+}
+
 .content strong {
   font-family: 'modelica-bold', sans-serif;
 }
@@ -17,28 +21,36 @@
 .btn1 {
   position: absolute;
   bottom: 20px;
-  transform: scale(0.9);
 }
 
 .btn1 a {
-  transform: scale(0.9);
+  font-size: 21px;
   transition: all 0.5s ease;
+  transform: scale(1);
 }
 
-.btn1:hover a {
-  transform: scale(1);
+.btn1 a:hover {
+  transform: scale(1.1);
 }
 
 .btn1:before {
   content: '';
-  width: 346px;
-  height: 209px;
-  background-image: url(../assets/images/line-btn1-3.webp);
+  width: 1082px;
+  height: 233px;
+  background-image: url(../assets/images/line-btn1-2.webp);
   background-size: contain;
+  background-repeat: no-repeat;
   position: absolute;
   display: block;
   right: -110%;
-  top: -25%;
+  bottom: -35%;
+}
+
+@media screen and (max-width: 1400px) {
+  .content p {
+    font-size: 2.5vw;
+    line-height: 3.5vw;
+  }
 }
 
 @media screen and (max-width: 768px) {

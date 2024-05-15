@@ -1,12 +1,3 @@
-.metListItem:nth-child(3) img {
-  max-height: 140px;
-}
-
-.metListItem:nth-child(7) img,
-.metListItem:nth-child(7) svg {
-  max-height: 125px;
-}
-
 .svgContainer img {
   max-height: 150px;
 }

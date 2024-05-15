@@ -1,4 +1,6 @@
-import { read } from './httpService';
+import { read, create } from './httpService';
+
+import axios from 'axios';
 
 export async function apiGetPage(id, language) {
   const pageContent = await read(`/pages/${id}?lang=${language}`);
@@ -15,4 +17,10 @@ export async function apiGetPostBySlug(slug, language) {
     `/methodology?slug=${slug}&lang=${language}`
   );
   return postTypeContent;
+}
+
+export async function apiSendForm(data) {
+  const customUrl = 'https://sti7ch.com/wp-json/myapi/v1/send-form/';
+  const response = await axios.post(customUrl, data);
+  return response.data;
 }

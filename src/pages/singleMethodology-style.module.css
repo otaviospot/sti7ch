@@ -1,6 +1,5 @@
 .content {
   position: relative;
-  width: 50%;
 }
 
 .content p {
@@ -31,6 +30,10 @@
   color: #b3b3b3;
 }
 
+.metList li:nth-child(4) img {
+  transform: scale(1.2);
+}
+
 .metList li:nth-child(5) img {
   transform: translateX(10px);
 }
@@ -40,9 +43,22 @@
   width: auto;
 }
 
+@media screen and (max-width: 1400px) {
+  .content p {
+    font-size: 2.5vw;
+    line-height: 3vw;
+    text-align: left;
+    font-family: 'modelica-bold', sans-serif;
+    margin-bottom: 30px;
+  }
+
+  .content ul {
+    font-size: 25px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .content {
-    width: 100%;
     margin-top: 10px;
   }
   .content p {

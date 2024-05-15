@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export const PageMainContent = ({ title, content, style }) => {
   return (
     <>
-      <h1 className="text-[40px] leading-[42px] md:leading-[7vw] md:text-[5vw] font-modelicabold text-left animate__animated animate__fadeInLeft">
+      <h1 className="text-[40px] md:text-[5vw] 2xl:text-[5vw] leading-[42px] 2xl:leading-[7vw] md:leading-[7vw] font-modelicabold text-left animate__animated animate__fadeInLeft">
         {title}
       </h1>
       <div className={style}>

@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
-import { apiGetPostType } from "../services/apiService";
-import { MyContext } from "../MyContext";
-import style from "./singleMethodology-style.module.css";
-import Loading from "../components/Loading";
-import btn2Image from "../assets/images/btn2.webp";
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { apiGetPostType } from '../services/apiService';
+import { MyContext } from '../MyContext';
+import style from './singleMethodology-style.module.css';
+import Loading from '../components/Loading';
 
 export default function SingleMethodology() {
   const [postContent, setPostContent] = useState({});
   const [loading, setLoading] = useState(true);
-  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
-  const [nextLink, setNextLink] = useState("");
+  const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+  const [nextLink, setNextLink] = useState('');
+  const [prevLink, setPrevLink] = useState('');
   const { slug } = useParams();
   const {
     methodologyContent,
@@ -27,7 +27,7 @@ export default function SingleMethodology() {
       if (!methodologyContent.length) {
         try {
           const backEndPTContent = await apiGetPostType(
-            "methodology",
+            'methodology',
             language
           );
           const postsWithImages = await Promise.all(
@@ -66,7 +66,7 @@ export default function SingleMethodology() {
           // Define o conteúdo do post atual
           const post = reversedContent[currentIndex];
           setPostContent(post);
-          setFeaturedImageUrl(post.imageUrl || "");
+          setFeaturedImageUrl(post.imageUrl || '');
 
           // Verifica se existe um próximo item
           const nextIndex = currentIndex + 1;
@@ -76,13 +76,21 @@ export default function SingleMethodology() {
           } else {
             setNextLink(null); // Não existe próximo item
           }
+
+          const prevIndex = currentIndex - 1;
+          if (prevIndex >= 0 && prevIndex < reversedContent.length) {
+            const prevItem = reversedContent[prevIndex];
+            setPrevLink(prevItem.slug); // Atualiza o slug do próximo item
+          } else {
+            setPrevLink(null); // Não existe próximo item
+          }
         }
       }
       setLoading(false);
     };
 
     fetchPostContent();
-  }, [slug, methodologyContent]);
+  }, [language, slug, methodologyContent]);
 
   return (
     <>
@@ -119,23 +127,29 @@ export default function SingleMethodology() {
         {!loading ? (
           <>
             <span
-              className={`hidden md:block absolute z-[1] h-[90vh] w-[auto] bottom-0 md:bottom-[0] -left-[15vw] ${
+              className={`hidden md:block absolute z-[1] h-[90vh] w-[auto] bottom-0 md:bottom-[0] -left-[10vw] ${
                 postContent.title &&
-                postContent.title.rendered.substring(0, 1) === "4"
-                  ? "top-[10%]"
-                  : "top-[5%]"
+                postContent.title.rendered.substring(0, 1) === '4'
+                  ? 'top-[10%]'
+                  : 'top-[5%]'
               }`}
             >
               {postContent.imageUrl && (
                 <img
+                  key={slug}
                   src={postContent.imageUrl}
                   alt={postContent.title.rendered}
-                  className="w-full h-full"
+                  className="h-[90vh] animate__animated animate__fadeInLeft"
                 />
               )}
             </span>
-            <div className="z-[2] flex w-full relative grow justify-start gap-[20px] pt-[35px] items-start flex-col md:flex-row md:justify-end">
-              <h1 className="text-[6vw] md:text-[4vw] flex flex-col md:flex-col items-baseline md:items-center gap-3 font-modelicabold text-left leading-[15vw] md:leading-[6vw] relative md:absolute bottom-0 md:bottom-10 left-0 animate__animated animate__fadeInLeft">
+            <div
+              key={slug}
+              className="z-[2] flex w-full relative grow justify-start gap-[20px] pt-[35px] md:pt-[5%] 2xl:pt-[10%]  items-start flex-col md:flex-row md:justify-end"
+            >
+              <h1
+                className={`text-[6vw] md:text-[4vw] flex flex-col md:flex-col items-baseline md:items-start gap-3 font-modelicabold text-left leading-[15vw] md:leading-[6vw] relative md:absolute bottom-0 md:bottom-0 2xl:bottom-10 left-0 animate__animated animate__fadeInLeft`}
+              >
                 <span className="text-[30vw] md:text-[10vw]">
                   {postContent.title &&
                     postContent.title.rendered.substring(0, 2)}
@@ -146,42 +160,60 @@ export default function SingleMethodology() {
               </h1>
 
               <div
-                className={`${style.content} text-left animate__animated animate__fadeInRight`}
+                key={slug}
+                className={`${style.content} text-left animate__animated animate__fadeInRight w-full md:w-[55%] 2xl:w-1/2`}
                 dangerouslySetInnerHTML={{
                   __html: postContent.content && postContent.content.rendered,
                 }}
               ></div>
             </div>
-            {nextLink ? (
-              <span className={`absolute right-10 bottom-10 flex`}>
+            {prevLink && (
+              <span
+                className={`absolute w-auto left-0 md:left-10 bottom-5 md:bottom-10 px-[20px] md:px-0 flex justify-between md:justify-end`}
+              >
                 <Link
-                  className={`z-[2] font-modelicamed text-[25px] leading-[30px] flex items-center justify-center hover:underline`}
+                  className={`md:hidden z-[2] font-modelicamed text-[21px] leading-[30px] flex items-center justify-center animate__animated animate__fadeInRight hover:underline`}
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
+                  }}
+                  to={`/methodology/${prevLink}`}
+                >
+                  {language === 'en' ? '< previous' : '< anterior'}
+                </Link>
+              </span>
+            )}
+            {nextLink ? (
+              <span
+                className={`absolute w-auto right-0 md:right-10 bottom-5 md:bottom-10 px-[20px] md:px-0 flex justify-between md:justify-end`}
+              >
+                <Link
+                  className={`z-[2] font-modelicamed text-[21px] leading-[30px] flex items-center justify-center hover:underline animate__animated animate__fadeInRight`}
+                  style={{
+                    cursor: 'pointer',
                   }}
                   to={`/methodology/${nextLink}`}
                 >
-                  {language === "en" ? "next >" : "próximo >"}
+                  {language === 'en' ? 'next >' : 'próximo >'}
                 </Link>
               </span>
             ) : (
               <Link
-                className={`absolute scale-[.8] md:scale-95 right-0 md:right-10 bottom-10 z-[2] font-modelicabold text-[21px] rounded-3xl text-white flex flex-col items-center justify-center py-[10px] px-[25px] bg-black hover:bg-blue-one hover:text-black`}
+                className={`absolute w-auto scale-[.8] md:scale-95 right-[20px] md:right-10 bottom-[20px] z-[2] text-[24px] selection:flex-col bg-transparent border-[1.5px] border-black hover:border-transparent border-solid py-[10px] px-[20px] font-modelicamed rounded-xl leading-[25px] flex items-center justify-center hover:text-white hover:bg-pink-one flex-col animate__animated animate__fadeInRight`}
                 to="/contact"
               >
                 <small className="text-[13px] font-modelicamed">
-                  {language === "en"
-                    ? "Move toward your goals with a"
-                    : "Comece agora com uma"}
+                  {language === 'en'
+                    ? 'Move toward your goals with a'
+                    : 'Comece agora com uma'}
                 </small>
                 <span>
-                  {language === "en" ? "free consultation" : "consulta grátis"}
+                  {language === 'en' ? 'free consultation' : 'consulta grátis'}
                 </span>
               </Link>
             )}
           </>
         ) : (
-          <Loading loading={loading} color={"#54BCCA"} />
+          <Loading loading={loading} color={'#54BCCA'} />
         )}
       </section>
     </>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 /*const BASE_URL =
   process.env.NODE_ENV === 'development'
@@ -6,7 +6,7 @@ import axios from "axios";
     : 'https://embol-yzffe.ondigitalocean.app/api';
 */
 
-const BASE_URL = "https://sti7ch.com/wp-json/wp/v2";
+const BASE_URL = 'https://sti7ch.com/wp-json/wp/v2';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,

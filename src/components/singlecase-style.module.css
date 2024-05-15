@@ -1,5 +1,6 @@
 .caseItem {
   position: relative;
+  box-sizing: border-box;
 }
 
 .caseItem:nth-child(odd) {
@@ -8,6 +9,14 @@
 
 .caseItem:nth-child(even) {
   align-self: flex-end;
+}
+
+.caseItem:nth-child(odd) .popUpSingleCase {
+  left: 0;
+}
+
+.caseItem:nth-child(even) .popUpSingleCase {
+  right: 0;
 }
 
 .caseItem:nth-child(2) {
@@ -63,5 +72,20 @@
 
   .contentPopUp p {
     font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 1536px) {
+  .caseItem:nth-child(odd) {
+    padding-right: 15%;
+  }
+
+  .caseItem:nth-child(even) {
+    padding-left: 15%;
+  }
+
+  .contentPopUp p {
+    font-size: 16px;
+    font-family: 'modelica-med', sans-serif;
   }
 }

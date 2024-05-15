@@ -23,7 +23,7 @@ export default function SingleCase({
 
   return (
     <div
-      className={` ${style.caseItem} flex flex-col mt-[50px] md:mt-8 w-full md:w-1/3 items-center text-left`}
+      className={` ${style.caseItem} flex flex-col mt-[50px] md:mt-8 w-full md:w-1/2 2xl:w-1/3 items-center text-left`}
     >
       <h3
         className={`${
@@ -43,10 +43,10 @@ export default function SingleCase({
       <div
         className={`${
           style.popUpSingleCase
-        } fixed overflow-y-auto md:absolute md:-translate-y-[20px] h-100v-h bottom-0 md:bottom-auto md:h-auto py-10 w-full md:w-[120%] px-10 rounded-xl transition-all duration-500 ease-in-out ${
+        } fixed overflow-y-auto md:absolute md:-translate-y-[20px] h-100v-h bottom-0 md:bottom-auto md:h-auto py-10 w-full md:w-[120%] 2xl:w-[120%] px-10 rounded-xl transition-all duration-500 ease-in-out ${
           isPopUpOpen
-            ? 'opacity-100 z-10 -translate-y-[0px] md:-translate-y-[20px] md:scale-100'
-            : 'opacity-0 z-0 translate-y-[100vh] md:-translate-y-[-20px] md:scale-0'
+            ? 'opacity-100 z-10 -translate-y-[0px] md:scale-100'
+            : 'opacity-0 z-0 translate-y-[100vh] md:scale-0'
         }`}
       >
         <button
@@ -55,7 +55,7 @@ export default function SingleCase({
         >
           <MdClose />
         </button>
-        <span className="font-modelicabold block text-[20px] mb-[15px]">
+        <span className="font-modelicabold block text-[20px] md:text-[18px] x2l:text-[20px] mb-[15px]">
           {singlecase.title && singlecase.title.rendered}
         </span>
         <div

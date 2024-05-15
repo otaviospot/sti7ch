@@ -1,13 +1,13 @@
-import { useEffect, useState, useContext } from "react";
-import { apiGetPage, apiGetPostType } from "../services/apiService";
-import { MyContext } from "../MyContext";
-import style from "./case-style.module.css";
-import Loading from "../components/Loading";
-import { Link } from "react-router-dom";
-import btn3Image from "../assets/images/btn3.webp";
-import bgCase from "../assets/images/bg-cases.svg";
-import SingleCase from "../components/SingleCase";
-import { PageMainContent } from "../components/PageMainContent";
+import { useEffect, useState, useContext } from 'react';
+import { apiGetPage, apiGetPostType } from '../services/apiService';
+import { MyContext } from '../MyContext';
+import style from './case-style.module.css';
+import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
+import btn1Image from '../assets/images/btn1.webp';
+import bgCase from '../assets/images/bg-cases.webp';
+import SingleCase from '../components/SingleCase';
+import { PageMainContent } from '../components/PageMainContent';
 
 export default function CaseStudies() {
   const [pageContent, setPageContent] = useState({});
@@ -21,7 +21,7 @@ export default function CaseStudies() {
       try {
         window.scrollTo(0, 0);
         const backEndContent = await apiGetPage(61, language);
-        const postTypeBackEndContent = await apiGetPostType("case", language);
+        const postTypeBackEndContent = await apiGetPostType('case', language);
         setPageContent(backEndContent);
         setCaseContent(postTypeBackEndContent);
         setLoading(false);
@@ -40,8 +40,8 @@ export default function CaseStudies() {
       >
         {!loading ? (
           <PageMainContent
-            title={pageContent.title.rendered}
-            content={pageContent.content.rendered}
+            title={pageContent.title && pageContent.title.rendered}
+            content={pageContent.content && pageContent.content.rendered}
             style={style.content}
           />
         ) : (
@@ -57,31 +57,28 @@ export default function CaseStudies() {
       >
         {!loading ? (
           <>
-            {caseContent &&
-              caseContent.map((singlecase) => (
-                <SingleCase
-                  singlecase={singlecase}
-                  openPopupId={openPopupId}
-                  setOpenPopupId={setOpenPopupId}
-                />
-              ))}
+            {caseContent.map((singlecase) => (
+              <SingleCase
+                singlecase={singlecase}
+                openPopupId={openPopupId}
+                setOpenPopupId={setOpenPopupId}
+              />
+            ))}
           </>
         ) : (
           <Loading loading={loading} />
         )}
         <span
-          className={`relative scale-[.8] md:absolute md:right-20 md:bottom-20 flex w-[225px] h-[120px] mt-[100px] md:mt-0`}
+          className={`${style.btn1} absolute right-[20px] flex w-[179px] h-[120px] transition-all ease-linear duration-500 animate__animated animate__fadeInRight animate__delay-3s`}
         >
           <Link
-            className={`w-[225px] h-[193px] z-[2] font-modelicamed text-[25px] leading-[29px] flex items-center justify-center bg-contain bg-no-repeat bg-center cursor-pointer`}
-            style={{
-              backgroundImage: `url(${btn3Image})`,
-            }}
+            className={`btn-1 w-[179px] h-[120px] z-[2] font-modelicamed bg-contain text-[28px] leading-[30px] flex items-center justify-center`}
+            style={{ backgroundImage: `url(${btn1Image})` }}
             to="/contact"
           >
-            {language === "en" ? `Let's Start` : "Começar seu"}
+            {language === 'en' ? `Let's Start` : 'Começar seu'}
             <br />
-            {language === "en" ? "Your Puzzle" : "quebra-cabeças"}
+            {language === 'en' ? 'Your Puzzle' : 'quebra-cabeças'}
           </Link>
         </span>
       </section>

@@ -5,7 +5,6 @@ import { AnimationOnScroll } from 'react-animation-on-scroll';
 import style from './methodology-style.module.css';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom';
-import btn2Image from '../assets/images/btn2.webp';
 import MethodologyItem from '../components/MethodologyItem';
 import { PageMainContent } from '../components/PageMainContent';
 
@@ -33,12 +32,14 @@ export default function Methodology() {
       try {
         const backEndPTContent = await apiGetPostType('methodology', language);
         const postsWithImages = await Promise.all(
-          backEndPTContent.map(async (post) => {
-            const imageUrl = post.featured_media
-              ? await fetchFeaturedImage(post.featured_media)
-              : null;
-            return { ...post, imageUrl };
-          })
+          backEndPTContent &&
+            backEndPTContent &&
+            backEndPTContent.map(async (post) => {
+              const imageUrl = post.featured_media
+                ? await fetchFeaturedImage(post.featured_media)
+                : null;
+              return { ...post, imageUrl };
+            })
         );
         setPostTypeContent(postsWithImages);
         setMethodologyContent(postsWithImages);
@@ -60,8 +61,8 @@ export default function Methodology() {
         {!loading ? (
           <>
             <PageMainContent
-              title={pageContent.title.rendered}
-              content={pageContent.content.rendered}
+              title={pageContent.title && pageContent.title.rendered}
+              content={pageContent.content && pageContent.content.rendered}
               style={style.contentMet}
             />
           </>
@@ -69,22 +70,33 @@ export default function Methodology() {
           <Loading loading={loading} />
         )}
       </section>
-      <section className="bg-bg-one w-full px-[20px] py-[35px] md:p-[75px] md:pb-[25px] items-end flex flex-col relative">
-        <ul className="flex justify-between w-full flex-col gap-10 md:gap-0 md:flex-row">
+      <section className="bg-bg-one w-full px-[20px] py-[35px] md:p-[75px] md:pb-[25px] items-end flex flex-col relative overflow-hidden">
+        <div
+          className={`${style.list_mets} flex justify-between w-full flex-col gap-10 md:gap-0 md:flex-row`}
+        >
           {!loading ? (
             <>
               {postTypeContent &&
-                [...postTypeContent]
-                  .reverse()
-                  .map((item, index) => <MethodologyItem item={item} />)}
+                [...postTypeContent].reverse().map((item, index) => (
+                  <AnimationOnScroll
+                    animateIn="animate__fadeInUp"
+                    offset={200}
+                    delay={index * 100}
+                    initiallyVisible={false}
+                    animateOnce={true}
+                    className={`${style.single_met} w-full md:w-[14%] grow-0 group flex-0-auto relative flex flex-col justify-center`}
+                  >
+                    <MethodologyItem item={item} />
+                  </AnimationOnScroll>
+                ))}
             </>
           ) : (
             <Loading loading={loading} />
           )}
-        </ul>
+        </div>
 
         <Link
-          className={`z-[2] text-[20px] border-[1.5px] mt-[40px] w-full md:w-auto border-black border-solid py-[5px] px-[20px] font-modelicabold rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-black`}
+          className={`z-[2] text-[21px] border-[1.5px] mt-[40px] w-full md:w-auto border-black hover:border-transparent border-solid py-[5px] px-[20px] font-modelicamed rounded-xl leading-[30px] flex items-center justify-center hover:text-white hover:bg-orange-one`}
           style={{
             cursor: 'pointer',
           }}

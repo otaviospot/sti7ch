@@ -1,21 +1,21 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios"; // Make sure to import axios
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios'; // Make sure to import axios
 
-import { MyContext } from "./MyContext";
-import Home from "./pages/Home";
-import Header from "./components/Header";
-import About from "./pages/About";
-import Methodology from "./pages/Methodology";
-import SingleMethodology from "./pages/SingleMethodology";
-import CaseStudies from "./pages/CaseStudies";
-import Contact from "./pages/Contact";
+import { MyContext } from './MyContext';
+import Home from './pages/Home';
+import Header from './components/Header';
+import About from './pages/About';
+import Methodology from './pages/Methodology';
+import SingleMethodology from './pages/SingleMethodology';
+import CaseStudies from './pages/CaseStudies';
+import Contact from './pages/Contact';
 
 function App() {
   const [methodologyContent, setMethodologyContent] = useState([]);
   const [caseContent, setCaseContent] = useState([]);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState('en');
 
   const fetchFeaturedImage = async (mediaId) => {
     try {
@@ -24,7 +24,7 @@ function App() {
       );
       return response.data.source_url;
     } catch (error) {
-      console.error("Error fetching featured image:", error);
+      console.error('Error fetching featured image:', error);
       return null;
     }
   };
@@ -47,7 +47,7 @@ function App() {
           handleLanguageChange,
         }}
       >
-        <Router basename="/dev">
+        <Router>
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />

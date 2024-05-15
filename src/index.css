@@ -48,7 +48,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.popup-open {
+  overflow: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Cor de fundo da trilha da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #b1b1b1; /* Cor do manipulador da barra de rolagem */
+  border-radius: 8px; /* Arredondamento do manipulador */
+  border: 2px solid white; /* Borda do manipulador */
 }
